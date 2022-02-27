@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import Modal from '../Modal';
 
 const availableCategories = [
@@ -7,33 +7,27 @@ const availableCategories = [
   { label: 'World', value: 'world' },
 ];
 
-class EditModal extends React.Component {
-  state = {
-    title: '',
-    shortDescription: '',
-    category: '',
-  };
+const EditModal = ({ title, isOpen, close, onSubmit, newsItem }) => {
+  const [title, setTitle] = useState('');
+  const [shortDescription, setShortDescription] = useState('');
+  const [category, setCategory] = useState('');
 
-  componentDidUpdate(prevProps) {
-    const { newsItem } = this.props;
-    if (newsItem && !prevProps.newsItem) {
-      // This is an editing modal and state values must be populated
-      const { title, shortDescription, category } = newsItem;
-      this.setState({ title, shortDescription, category });
-    }
+  useEffect(() => {
+    const { title, shortDescription, category } = newsItem;
+    setTitle(title);
+    setShortDescription(shortDescription);
+    setCategory(category);
+  }, [newsItem]);
 
-    if (prevProps.newsItem && !newsItem) {
-      this.setState({ title: '', shortDescription: '', category: '' });
-    }
-  }
-
-  onInputChange(e) {
-    this.setState({ [ e.target.name ]: e.target.value });
-  }
-
-  renderForm() {
-    const { title, shortDescription, category } = this.state;
-    return (
+  return (
+    <Modal
+      title={ title }
+      isOpen={ isOpen }
+      close={ close }
+      onSubmit={ () => {
+        const id = newsItem ? newsItem.id : 0;
+        onSubmit({ id, title, shortDescription, category })
+      } }>
       <form action="" className="form form-horizontal">
         <div className="form-group">
           <label htmlFor="title">Title</label>
@@ -60,24 +54,8 @@ class EditModal extends React.Component {
           </select>
         </div>
       </form>
-    )
-  }
-
-  render() {
-    const { title, isOpen, close, onSubmit, newsItem } = this.props;
-    return (
-      <Modal
-        title={ title }
-        isOpen={ isOpen }
-        close={ close }
-        onSubmit={ () => {
-          const id = newsItem ? newsItem.id : 0;
-          onSubmit({ id, title: this.state.title, shortDescription: this.state.shortDescription, category: this.state.category })
-        } }>
-        { this.renderForm() }
-      </Modal>
-    )
-  }
+    </Modal>
+  )
 }
 
 export default EditModal;

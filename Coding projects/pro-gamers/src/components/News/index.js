@@ -1,109 +1,96 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { getNews } from '../../services/newsService';
 import NewsList from '../NewsList';
 import SearchBar from '../SearchBar';
 import CategoryFilter from '../CategoryFilter';
 import EditModal from '../EditModal';
 
-class News extends React.Component {
-  componentDidMount() {
-    this.setState({
-      news: getNews(),
-    });
-  }
+const News = () => {
+  const [news, setNews] = useState([]);
+  const [search, setSearch] = useState('');
+  const [filter, setFilter] = useState('');
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [selectedItem, setSelectedItem] = useState(null);
 
-  state = {
-    news: [],
-    search: '',
-    filter: '',
-    isModalOpen: false,
-    selectedItem: null,
-  };
+  useEffect(() => {
+    setNews(getNews());
+  }, []);
 
-  filterList() {
-    const { search, filter, news } = this.state;
+  const filterList = () => {
     const filteredNews = news.filter(n => (n.category === filter || filter === '') && (n.title.toLowerCase().includes(search.toLowerCase()) || search === ''));
     return filteredNews;
   }
 
-  deleteItem(id) {
-    // TODO: Make an actual network call deleting the item
-    this.setState({ news: this.state.news.filter(n => n.id !== id) });
+  const deleteItem = id => {
+    setNews(news => news.filter(n => n.id !== id));
   }
 
-  addItem(newsItem) {
-    // TODO: Make an actual network call adding the item
-    this.setState({ news: [ ...this.state.news, newsItem ], isModalOpen: false });
+  const addItem = newsItem => {
+    setNews(news => [ ...news, newsItem ]);
+    setIsModalOpen(false);
   }
 
-  editItem(newsItem) {
-    // TODO: Make an actual network call editing the item
-    this.setState({ news: this.state.news.map(n => {
+  const editItem = newsItem => {
+    setNews(news => news.map(n => {
       if (n.id === newsItem.id) {
         return newsItem;
       }
       return n;
-    }), isModalOpen: false });
+    }));
+    setIsModalOpen(false);
   }
 
-  openModal(type, newsItem) {
+  const openModal = (type, newsItem) => {
     if (type === 'edit') {
-      this.setState({ isModalOpen: true, selectedItem: newsItem });
-    } else if (type === 'add') {
-      this.setState({ isModalOpen: true });
+      setSelectedItem(newsItem);
     }
+    setIsModalOpen(true);
   }
 
-  renderModal() {
-    const { selectedItem } = this.state;
+  const renderModal = () => {
     if (selectedItem) {
       return (
         <EditModal
           title="Edit news item"
-          isOpen={ this.state.isModalOpen }
-          onSubmit={ newsItem => this.editItem(newsItem) }
+          isOpen={ isModalOpen }
+          onSubmit={ newsItem => editItem(newsItem) }
           newsItem={ selectedItem }
-          close={ () => this.setState({ isModalOpen: false, selectedItem: null }) } />
+          close={ () => {
+            setIsModalOpen(false);
+            setSelectedItem(null);
+          }} />
       )
     }
     return (
       <EditModal
         title="Add news item"
-        isOpen={ this.state.isModalOpen }
-        onSubmit={ newsItem => this.addItem(newsItem) }
-        close={ () => this.setState({ isModalOpen: false }) } />
+        isOpen={ isModalOpen }
+        onSubmit={ newsItem => addItem(newsItem) }
+        close={ () => setIsModalOpen(false) } />
     )
   }
+  
+  const filteredList = filterList();
 
-  // constructor(props) {
-  //   super(props);
-  //   this.state = {
-  //     news: [],
-  //   };
-  // };
-
-  render() {
-    const filteredList = this.filterList();
-    return (
-      <div>
-        <h1>News</h1>
-        <button
-          type="button"
-          className="btn btn-primary"
-          onClick={ () => this.openModal('add') }>Add news item</button>
-        <SearchBar
-          value={ this.state.search }
-          changeFn={ e => this.setState({ search: e.target.value }) } />
-        <CategoryFilter
-          onChange={ e => this.setState({ filter: e.target.id }) } />
-        <NewsList
-          news={ filteredList }
-          editItem={ newsItem => this.openModal('edit', newsItem) }
-          deleteItem={ id => this.deleteItem(id) } />
-        { this.renderModal() }
-      </div>
-    );
-  }
-}
+  return (
+    <div>
+      <h1>News</h1>
+      <button
+        type="button"
+        className="btn btn-primary"
+        onClick={ () => openModal('add') }>Add news item</button>
+      <SearchBar
+        value={ this.state.search }
+        changeFn={ e => setSearch(e.target.value) } />
+      <CategoryFilter
+        onChange={ e => setFilter(e.target.id) } />
+      <NewsList
+        news={ filteredList }
+        editItem={ newsItem => openModal('edit', newsItem) }
+        deleteItem={ id => deleteItem(id) } />
+      { renderModal() }
+    </div>
+  );
+};
 
 export default News;
