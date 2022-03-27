@@ -1,0 +1,4 @@
+{
+  "connectionString": "mongodb://0.0.0.0:27017/events-db",
+  "databaseName": "events-db"
+}

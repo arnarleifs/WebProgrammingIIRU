@@ -1,0 +1,14 @@
+.host-container {
+  display: grid;
+  grid-template-columns: 200px 1fr;
+  align-items: center;
+  padding: 20px;
+  .host-avatar {
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    background-size: contain;
+    background-position: center;
+    background-repeat: no-repeat;
+  }
+}
