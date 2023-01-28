@@ -1,0 +1,68 @@
+* {
+  box-sizing: border-box;
+}
+
+body {
+  font-family: "Unbounded", cursive;
+  margin: 0;
+  padding: 0;
+}
+
+main {
+  display: grid;
+  grid-template-rows:
+    100px
+    600px
+    100px
+    auto;
+}
+
+.main-navigation {
+  display: grid;
+  align-content: center;
+  padding: 0 60px;
+}
+
+.hero-section {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  background-color: black;
+  color: white;
+}
+
+.hero-section .text-section {
+  display: grid;
+  align-content: center;
+  padding: 60px;
+}
+
+.hero-section .image-section {
+  background-image: url(/resources/food.jpeg);
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+}
+
+.tab-links {
+  list-style: none;
+  padding-left: 0;
+  margin: 0;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, 150px);
+  justify-content: center;
+  align-content: center;
+}
+
+.tab-links .tab-link {
+  position: relative;
+  text-align: center;
+}
+
+.tab-links .tab-link:hover {
+  cursor: pointer;
+}
+
+.list-section {
+  display: grid;
+  justify-content: center;
+}

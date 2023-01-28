@@ -1,0 +1,100 @@
+<html>
+  <head>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Unbounded:wght@400;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="/css/base.css" />
+  </head>
+  <body>
+    <main>
+      <nav class="main-navigation">
+        <img src="/resources/logo.svg" />
+      </nav>
+      <div class="hero-section">
+        <div class="text-section">
+          <h1>The foods of our world!</h1>
+          <p>
+            Please navigate through our wonderful selections of the worlds food.
+          </p>
+        </div>
+        <div class="image-section"></div>
+      </div>
+      <ul class="tab-links">
+        <li class="tab-link" data-link="random-food">Random food</li>
+        <li class="tab-link" data-link="categories">Categories</li>
+      </ul>
+      <div class="list-section"></div>
+    </main>
+
+    <!-- Templates -->
+    <template id="food-card-template">
+      <style>
+        .food-card {
+          display: grid;
+          justify-items: center;
+          text-align: center;
+          padding: 20px;
+        }
+        .food-image {
+          width: 300px;
+          height: 300px;
+          background-size: cover;
+          background-repeat: no-repeat;
+          background-position: center;
+        }
+        .category {
+          font-weight: bold;
+        }
+        ul {
+          list-style: none;
+          padding-left: 0;
+        }
+        p {
+          margin: 0;
+        }
+      </style>
+      <div class="food-card">
+        <div class="food-image"></div>
+        <h2><slot name="food-title"></slot></h2>
+        <p class="category"><slot name="food-category"></slot></p>
+        <h3>Ingredients</h3>
+        <ul>
+          <slot name="recipe-items"></slot>
+        </ul>
+        <h3>Instructions</h3>
+        <p><slot name="food-instructions"></slot></p>
+      </div>
+    </template>
+    <template id="category-card-template">
+      <style>
+        .category-card {
+          display: grid;
+          justify-items: center;
+          max-width: 800px;
+          text-align: center;
+        }
+        .category-image {
+          width: 300px;
+          height: 300px;
+          border-radius: 50%;
+          background-size: cover;
+          background-repeat: no-repeat;
+          background-position: center;
+        }
+      </style>
+      <div class="category-card">
+        <div class="category-image"></div>
+        <h2><slot name="category-title"></slot></h2>
+        <p><slot name="category-description"></slot></p>
+      </div>
+    </template>
+    <!-- End of templates-->
+
+    <script src="/scripts/tabs.js"></script>
+    <script src="/web-components/category-card/category-card.js"></script>
+    <script src="/web-components/food-card/food-card.js"></script>
+  </body>
+</html>
