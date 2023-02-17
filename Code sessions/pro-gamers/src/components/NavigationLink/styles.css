@@ -1,0 +1,9 @@
+.navigation-link {
+  display: flex;
+  align-items: center;
+}
+
+.navigation-link a {
+  text-decoration: none;
+  color: black;
+}
