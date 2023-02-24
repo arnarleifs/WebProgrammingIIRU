@@ -1,24 +1,34 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Dialog, DialogTitle, DialogContent, DialogContentText, TextField, DialogActions, Button, FormControl, Select, InputLabel, MenuItem } from "@mui/material"
+import PropTypes from 'prop-types';
 
 export const NewsItemModal = ({
+  defaultItem,
   isOpen,
   onSubmit,
   onClose,
-  defaultValues,
 }) => {
-  const [title, setTitle] = useState("")
-  const [category, setCategory] = useState("");
-  const [shortDescription, setShortDescription] = useState("");
+  const [title, setTitle] = useState(defaultItem?.title)
+  const [category, setCategory] = useState(defaultItem?.category);
+  const [shortDescription, setShortDescription] = useState(defaultItem?.shortDescription);
 
-  const onModalSubmit = () => onSubmit(title, shortDescription, category);
+  const onModalSubmit = () => onSubmit(defaultItem?.id, title, shortDescription, category);
+
+  useEffect(() => {
+    setTitle(defaultItem?.title ?? "");
+    setCategory(defaultItem?.category ?? "");
+    setShortDescription(defaultItem?.shortDescription ?? "");
+  }, [defaultItem?.title, defaultItem?.category, defaultItem?.shortDescription]);
+
+  const renderTitle = () => (defaultItem ? 'Edit news item' : 'Add news item');
+  const renderDescription = () => defaultItem ? 'To edit a news item, please fill out the form below.' : 'To add a news item, please fill out the form below.';
 
   return (
     <Dialog open={isOpen} onClose={onClose}>
-      <DialogTitle>Add news item</DialogTitle>
+      <DialogTitle>{renderTitle()}</DialogTitle>
       <DialogContent>
         <DialogContentText>
-          To add a news item, please fill out the form below.
+          {renderDescription()}
         </DialogContentText>
         <TextField
           autoFocus
@@ -59,8 +69,20 @@ export const NewsItemModal = ({
       </DialogContent>
       <DialogActions>
         <Button onClick={onClose}>Cancel</Button>
-        <Button onClick={onModalSubmit}>Add</Button>
+        <Button onClick={onModalSubmit}>Confirm</Button>
       </DialogActions>
     </Dialog>
   );
+}
+
+NewsItemModal.propTypes = {
+  defaultItem: PropTypes.shape({
+    id: PropTypes.number.isRequired,
+    title: PropTypes.string.isRequired,
+    shortDescription: PropTypes.string.isRequired,
+    category: PropTypes.string.isRequired
+  }),
+  isOpen: PropTypes.bool.isRequired,
+  onSubmit: PropTypes.func.isRequired,
+  onClose: PropTypes.func.isRequired,
 }
