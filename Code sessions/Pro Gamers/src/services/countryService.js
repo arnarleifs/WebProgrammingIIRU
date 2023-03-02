@@ -3,7 +3,7 @@
 **/
 
 const endpoint = "http://battuta.medunes.net/api";
-const key = "00000000000000000000000000000000";
+const key = "00000000000000000000";
 
 async function retrieveItemsWithFormat(url, format) {
   const response = await fetch(url);
