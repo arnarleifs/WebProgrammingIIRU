@@ -12,6 +12,7 @@ export const NavigationBar = () => {
         <NavigationLink title="News" href="/news" />
         <NavigationLink title="Top 10 Games" href="/top-games" />
         <NavigationLink title="About" href="/about" />
+        <NavigationLink title="Subscribe now" href="/subscribe" />
       </ul>
       <User username={context.username} fullName={context.fullName} />
     </nav>
