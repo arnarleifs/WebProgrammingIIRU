@@ -1,5 +1,5 @@
+import { FormControl, InputLabel, Select, MenuItem, Box } from "@mui/material";
 import { useEffect, useState } from "react";
-import { Box, FormControl, InputLabel, Select, MenuItem } from "@mui/material";
 
 export const RemoteSelectItem = ({
   label,
@@ -10,14 +10,15 @@ export const RemoteSelectItem = ({
   getOptions,
   isDisabled,
 }) => {
-  const [data, setData] = useState([]);
+  const [options, setOptions] = useState([]);
 
   useEffect(() => {
     if (isDisabled) {
       return;
     }
+
     async function getData() {
-      setData(await getOptions());
+      setOptions(await getOptions());
     }
 
     getData();
@@ -34,11 +35,10 @@ export const RemoteSelectItem = ({
           label={label}
           onChange={(e) => onSelect(e.target.value)}
           disabled={isDisabled}
-          defaultValue={defaultOption}
         >
-          {data?.map((d) => (
-            <MenuItem key={d.value} value={d.value}>
-              {d.label}
+          {options?.map((o) => (
+            <MenuItem key={o.value} value={o.value}>
+              {o.label}
             </MenuItem>
           ))}
         </Select>

@@ -1,4 +1,4 @@
-import { Snackbar, Box, Button, FormControl, TextField } from "@mui/material";
+import { Box, Button, FormControl, Snackbar, TextField } from "@mui/material";
 import { useRef, useState } from "react";
 import { RemoteSelectItem } from "../../components/RemoteSelectItem/RemoteSelectItem";
 import {
@@ -11,9 +11,14 @@ import validator from "validator";
 export const Subscribe = () => {
   const [submitted, setSubmitted] = useState(false);
   const [errors, setErrors] = useState({});
+
+  // Uncontrolled components
   const fullNameRef = useRef(null);
-  const telephoneRef = useRef(null);
   const emailRef = useRef(null);
+  const telephoneRef = useRef(null);
+  const addressRef = useRef(null);
+
+  // Controlled components
   const [country, setCountry] = useState("");
   const [region, setRegion] = useState("");
   const [city, setCity] = useState("");
@@ -22,6 +27,8 @@ export const Subscribe = () => {
     const fullName = fullNameRef.current.value;
     const email = emailRef.current.value;
     const telephone = telephoneRef.current.value;
+    const address = addressRef.current.value;
+
     const errors = {};
 
     if (fullName === "") {
@@ -31,15 +38,15 @@ export const Subscribe = () => {
       errors.email = "Email is not properly formatted.";
     }
     if (!validator.isMobilePhone(telephone)) {
-      errors.telephone = "Telephone is not correct.";
+      errors.telephone = "Telephone is not properly formatted.";
+    }
+    if (address === "") {
+      errors.address = "Address is required.";
     }
 
-    if (Object.keys(errors).length > 0) {
-      setErrors(errors);
-      return false;
-    }
+    setErrors(errors);
 
-    return true;
+    return Object.keys(errors).length === 0;
   };
 
   const onSubmit = (e) => {
@@ -49,20 +56,22 @@ export const Subscribe = () => {
       return;
     }
 
-    console.log(
-      fullNameRef.current.value,
-      telephoneRef.current.value,
-      emailRef.current.value,
-      country,
-      region,
-      city
-    );
     setSubmitted(true);
 
-    // Reset the fields
+    console.log(fullNameRef.current.value);
+    console.log(emailRef.current.value);
+    console.log(telephoneRef.current.value);
+    console.log(addressRef.current.value);
+
+    console.log(country);
+    console.log(region);
+    console.log(city);
+
+    // Reset the form
     fullNameRef.current.value = "";
-    telephoneRef.current.value = "";
     emailRef.current.value = "";
+    telephoneRef.current.value = "";
+    addressRef.current.value = "";
 
     setCountry("");
     setRegion("");
@@ -72,7 +81,7 @@ export const Subscribe = () => {
   return (
     <>
       <h1>Subscribe now!</h1>
-      <form data-testid="form" onSubmit={onSubmit}>
+      <form onSubmit={onSubmit} data-testid="form">
         <Box marginTop={2} marginBottom={2}>
           <FormControl fullWidth>
             <TextField
@@ -89,18 +98,7 @@ export const Subscribe = () => {
         <Box marginTop={2} marginBottom={2}>
           <FormControl fullWidth>
             <TextField
-              id="telephone"
-              label="Telephone"
-              variant="standard"
-              inputRef={telephoneRef}
-              error={Boolean(errors.telephone)}
-              helperText={errors.telephone}
-            />
-          </FormControl>
-        </Box>
-        <Box marginTop={2} marginBottom={2}>
-          <FormControl fullWidth>
-            <TextField
+              autoFocus
               id="email"
               label="Email address"
               variant="standard"
@@ -110,55 +108,77 @@ export const Subscribe = () => {
             />
           </FormControl>
         </Box>
+        <Box marginTop={2} marginBottom={2}>
+          <FormControl fullWidth>
+            <TextField
+              autoFocus
+              id="telephone"
+              label="Telephone"
+              variant="standard"
+              inputRef={telephoneRef}
+              error={Boolean(errors.telephone)}
+              helperText={errors.telephone}
+            />
+          </FormControl>
+        </Box>
         <RemoteSelectItem
           label="Country"
           value={country}
           name="country"
-          onSelect={(value) => setCountry(value)}
-          defaultOption="--- No country is selected ---"
+          onSelect={setCountry}
           getOptions={async () =>
-            await getCountries((c) => ({
+            getCountries((c) => ({
               label: c.name,
               value: c.code,
             }))
           }
         />
-
         <RemoteSelectItem
           label="Region"
           value={region}
           name="region"
-          onSelect={(value) => setRegion(value)}
-          defaultOption="--- No region is selected ---"
-          isDisabled={country === ""}
+          onSelect={setRegion}
           getOptions={async () =>
-            await getRegions(country, (c) => ({
+            getRegions(country, (c) => ({
               label: c.region,
               value: c.region,
             }))
           }
+          isDisabled={country === ""}
         />
         <RemoteSelectItem
           label="City"
           value={city}
           name="city"
-          onSelect={(value) => setCity(value)}
-          defaultOption="--- No city is selected ---"
-          isDisabled={country === "" || region === ""}
+          onSelect={setCity}
           getOptions={async () =>
-            await getCities(country, region, (c) => ({
+            getCities(country, region, (c) => ({
               label: c.city,
               value: c.city,
             }))
           }
+          isDisabled={country === "" || region === ""}
         />
+        <Box marginTop={2} marginBottom={2}>
+          <FormControl fullWidth>
+            <TextField
+              autoFocus
+              id="address"
+              label="Address"
+              variant="standard"
+              inputRef={addressRef}
+              error={Boolean(errors.address)}
+              helperText={errors.address}
+            />
+          </FormControl>
+        </Box>
         <Button variant="contained" type="submit">
           Subscribe
         </Button>
       </form>
       <Snackbar
         open={submitted}
-        autoHideDuration={6000}
+        autoHideDuration={5000}
         onClose={() => setSubmitted(false)}
         message="Successfully subscribed!"
       />

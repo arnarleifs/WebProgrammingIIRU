@@ -1,10 +1,9 @@
-import { fireEvent, render, screen } from "@testing-library/react";
 import { SearchBar } from "./SearchBar";
+import { fireEvent, render, screen } from "@testing-library/react";
 
 describe("SearchBar", () => {
   it("should contain the correct value when written to", () => {
     const onChange = jest.fn();
-
     render(<SearchBar value="Test" onChange={onChange} />);
 
     const input = screen.getByLabelText("Search");
@@ -13,6 +12,6 @@ describe("SearchBar", () => {
     fireEvent.change(input, newEvent);
 
     expect(screen.getByDisplayValue("Test")).toBeInTheDocument();
-    expect(onChange).toHaveBeenCalledWith("New test");
+    expect(onChange).toHaveBeenCalledWith(newEvent.target.value);
   });
 });

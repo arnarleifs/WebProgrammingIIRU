@@ -13,7 +13,7 @@ const router = createBrowserRouter(createRoutesFromElements(
     <Route path="news/:newsItemId" element={<NewsItemDetails />} />
     <Route path="about" element={<About />} />
     <Route path="top-games" element={<Top10Games />} />
-    <Route path="subscribe" element={<Subscribe />} />
+    <Route path="subscribe-now" element={<Subscribe />} />
   </Route>
 ));
 

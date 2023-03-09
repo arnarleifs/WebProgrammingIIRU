@@ -1,13 +1,12 @@
-import { fireEvent, render, screen, waitFor } from "@testing-library/react";
 import { RemoteSelectItem } from "./RemoteSelectItem";
+import { render, screen, fireEvent, waitFor } from "@testing-library/react";
 
 describe("RemoteSelectItem", () => {
-  it("should render RemoteSelectItem correctly", async () => {
+  it("should render RemoteSelectItem correctly", () => {
     render(<RemoteSelectItem value="" label="Country" getOptions={() => []} />);
-    await waitFor(() => {
-      const fullName = screen.getByLabelText("Country");
-      expect(fullName).toBeInTheDocument();
-    });
+
+    const label = screen.getByLabelText("Country");
+    expect(label).toBeInTheDocument();
   });
 
   it("should render RemoteSelectItem options", async () => {
@@ -18,15 +17,16 @@ describe("RemoteSelectItem", () => {
         getOptions={async () => [
           {
             value: 1,
-            label: "zup",
+            label: "First item",
           },
           {
             value: 2,
-            label: "yo",
+            label: "Second item",
           },
         ]}
       />
     );
+
     fireEvent.mouseDown(screen.getByRole("button"));
 
     await waitFor(() => {
