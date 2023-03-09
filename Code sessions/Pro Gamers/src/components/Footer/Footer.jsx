@@ -4,6 +4,7 @@ import { User } from "../User/User";
 import { Box, Button, ButtonGroup } from "@mui/material";
 import "./footer.css";
 import { ThemeContext } from "../../contexts/ThemeContext";
+import { ProfileIcon } from "../ProfileIcon/ProfileIcon";
 
 export const Footer = () => {
   const userContext = useContext(UserContext);
@@ -29,6 +30,7 @@ export const Footer = () => {
           </Button>
         </ButtonGroup>
       </Box>
+      <ProfileIcon />
     </footer>
   );
 };
