@@ -5,8 +5,9 @@ import { update } from "../../slices/profileSlice";
 
 export const Profile = () => {
   const profile = useSelector((state) => state.profile);
+  const translations = useSelector((state) => state.language.translations);
 
-  const fullNameRef = useRef(profile.fullName);
+  const fullNameRef = useRef(null);
   const [image, setImage] = useState(profile.image);
   const dispatch = useDispatch();
 
@@ -31,11 +32,12 @@ export const Profile = () => {
 
   return (
     <>
-      <h1>Profile</h1>
+      <h1>{translations.profile}</h1>
       <FormControl fullWidth>
         <TextField
+          defaultValue={profile?.fullName}
           id="full-name"
-          label="Full name"
+          label={translations.fullName}
           variant="outlined"
           inputRef={fullNameRef}
         />
@@ -57,7 +59,7 @@ export const Profile = () => {
           height: 500,
         }}
       ></Paper>
-      <Button onClick={onSubmit}>Submit</Button>
+      <Button onClick={onSubmit}>{translations.submit}</Button>
     </>
   );
 };
