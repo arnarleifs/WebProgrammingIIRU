@@ -4,29 +4,25 @@ import { CategoryFilter } from '../../components/CategoryFilter/CategoryFilter';
 import { NewsItemModal } from '../../components/NewsItemModal/NewsItemModal';
 import { NewsList } from '../../components/NewsList/NewsList';
 import { SearchBar } from '../../components/SearchBar/SearchBar';
-import newsJson from '../../resources/news.json';
+import { useDispatch, useSelector } from 'react-redux';
+import { add, edit, remove } from '../../slices/newsSlice';
 
 export const News = () => {
-  const [news, setNews] = useState(newsJson.news);
+  const news = useSelector(state => state.news.value);
+  const dispatch = useDispatch();
+
   const [selectedNewsItem, setSelectedNewsItem] = useState();
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [searchValue, setSearchValue] = useState("");
   const [categoryFilter, setCategoryFilter] = useState("");
 
   const onAdd = (_, title, shortDescription, category) => {
-    const sortedNews = news.sort((a, b) => {
-      if (a.id > b.id) { return 1; }
-      else if (a.id < b.id) { return -1; }
-      return 0;
-    });
-    const latestId = sortedNews[sortedNews.length - 1].id + 1;
-
-    setNews([...news, { id: latestId, title, shortDescription, category }]);
+    dispatch(add({ title, shortDescription, category }));
     setIsModalOpen(false);
   }
 
   const onDelete = (id) => {
-    setNews(news => news.filter(n => n.id !== id));
+    dispatch(remove(id));
   }
 
   const onEdit = (id) => {
@@ -36,17 +32,7 @@ export const News = () => {
   };
 
   const onEditSubmit = (id, title, shortDescription, category) => {
-    setNews(news => news.map(n => {
-      if (n.id === id) {
-        return {
-          id,
-          title,
-          shortDescription,
-          category
-        }
-      }
-      return n;
-    }));
+    dispatch(edit({ id, title, shortDescription, category }));
     setIsModalOpen(false);
   }
 

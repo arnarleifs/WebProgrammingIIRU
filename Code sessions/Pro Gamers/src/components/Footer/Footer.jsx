@@ -4,8 +4,13 @@ import { User } from "../User/User";
 import { Box, Button, ButtonGroup } from "@mui/material";
 import "./footer.css";
 import { ThemeContext } from "../../contexts/ThemeContext";
+import { ProfileIcon } from "../ProfileIcon/ProfileIcon";
+import { update } from "../../slices/languageSlice";
+import { useDispatch, useSelector } from "react-redux";
 
 export const Footer = () => {
+  const dispatch = useDispatch();
+  const translations = useSelector(state => state.language.translations);
   const userContext = useContext(UserContext);
   const themeContext = useContext(ThemeContext);
 
@@ -22,13 +27,15 @@ export const Footer = () => {
               userContext.updateUser("Mister Miyagi", "miyagi@j.jp")
             }
           >
-            Change user
+            {translations.changeUser}
           </Button>
           <Button variant="outlined" onClick={themeContext.toggleTheme}>
-            Switch to {themeContext.theme === "dark" ? "light" : "dark"} theme
+            {translations.switchTo} {themeContext.theme === "dark" ? translations.light : translations.dark} {translations.theme}
           </Button>
+          <Button variant="outlined" onClick={() => dispatch(update())}>{translations.switchLanguage}</Button>
         </ButtonGroup>
       </Box>
+      <ProfileIcon />
     </footer>
   );
 };
