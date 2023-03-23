@@ -12,5 +12,5 @@ export const NewsItemDetails = () => {
       <p>{newsItem?.longDescription}</p>
       <Chip label={newsItem?.category} variant="outlined" />
     </div>
-  )
+  );
 };

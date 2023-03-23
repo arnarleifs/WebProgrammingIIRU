@@ -5,11 +5,13 @@ import { useContext } from "react";
 import { UserContext } from "../../contexts/UserContext";
 import { ThemeContext } from "../../contexts/ThemeContext";
 import { useSelector } from "react-redux";
+import { ProfileIcon } from "../ProfileIcon/ProfileIcon";
 
 export const NavigationBar = () => {
   const translations = useSelector(state => state.language.translations);
   const userContext = useContext(UserContext);
   const themeContext = useContext(ThemeContext);
+  const language = useSelector((state) => state.language.translations);
 
   return (
     <nav className={`navigation-bar ${themeContext.theme}`}>
@@ -21,6 +23,14 @@ export const NavigationBar = () => {
         <NavigationLink title={translations.profile} href="/profile" />
       </ul>
       <User username={userContext.username} fullName={userContext.fullName} />
+      <ul className="navigation-links">
+        <NavigationLink title={language.news} href="/news" />
+        <NavigationLink title={language.topGames} href="/top-games" />
+        <NavigationLink title={language.about} href="/about" />
+        <NavigationLink title={language.subscribe} href="/subscribe-now" />
+        <NavigationLink title={language.profile} href="/profile" />
+      </ul>
+      <ProfileIcon />
     </nav>
   );
 };

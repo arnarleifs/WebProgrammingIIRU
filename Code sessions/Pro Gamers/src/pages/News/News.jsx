@@ -19,14 +19,14 @@ export const News = () => {
   const onAdd = (_, title, shortDescription, category) => {
     dispatch(add({ title, shortDescription, category }));
     setIsModalOpen(false);
-  }
+  };
 
   const onDelete = (id) => {
     dispatch(remove(id));
   }
 
   const onEdit = (id) => {
-    const selectedNewsItem = news.find(n => n.id === id);
+    const selectedNewsItem = news.find((n) => n.id === id);
     setSelectedNewsItem(selectedNewsItem);
     setIsModalOpen(true);
   };
@@ -34,25 +34,43 @@ export const News = () => {
   const onEditSubmit = (id, title, shortDescription, category) => {
     dispatch(edit({ id, title, shortDescription, category }));
     setIsModalOpen(false);
-  }
+  };
 
   return (
     <>
       <h1>News</h1>
       <Box>
-        <Button variant="outlined" onClick={() => {
-          setSelectedNewsItem(undefined);
-          setIsModalOpen(true);
-        }}>Add news item</Button>
+        <Button
+          variant="outlined"
+          onClick={() => {
+            setSelectedNewsItem(undefined);
+            setIsModalOpen(true);
+          }}
+        >
+          Add news item
+        </Button>
       </Box>
-      <SearchBar onChange={value => setSearchValue(value)} value={searchValue} />
-      <CategoryFilter onChange={value => setCategoryFilter(value)} value={categoryFilter} />
-      <NewsList news={news} filter={searchValue} categoryFilter={categoryFilter} onDelete={onDelete} onEdit={onEdit} />
+      <SearchBar
+        onChange={(value) => setSearchValue(value)}
+        value={searchValue}
+      />
+      <CategoryFilter
+        onChange={(value) => setCategoryFilter(value)}
+        value={categoryFilter}
+      />
+      <NewsList
+        news={news}
+        filter={searchValue}
+        categoryFilter={categoryFilter}
+        onDelete={onDelete}
+        onEdit={onEdit}
+      />
       <NewsItemModal
         defaultItem={selectedNewsItem}
         isOpen={isModalOpen}
         onClose={() => setIsModalOpen(false)}
-        onSubmit={selectedNewsItem ? onEditSubmit : onAdd} />
+        onSubmit={selectedNewsItem ? onEditSubmit : onAdd}
+      />
     </>
-  )
+  );
 };

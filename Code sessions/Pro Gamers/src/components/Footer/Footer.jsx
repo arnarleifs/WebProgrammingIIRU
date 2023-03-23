@@ -10,9 +10,9 @@ import { useDispatch, useSelector } from "react-redux";
 
 export const Footer = () => {
   const dispatch = useDispatch();
-  const translations = useSelector(state => state.language.translations);
   const userContext = useContext(UserContext);
   const themeContext = useContext(ThemeContext);
+  const translations = useSelector((state) => state.language.translations);
 
   return (
     <footer className={`footer ${themeContext.theme}`}>
