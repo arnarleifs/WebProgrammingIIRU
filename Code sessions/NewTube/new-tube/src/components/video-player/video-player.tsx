@@ -1,7 +1,7 @@
 import { Video } from "../../types/video";
 
 interface VideoPlayerProps {
-  video: Video;
+  video: Video | undefined;
 }
 
 export const VideoPlayer = ({ video }: VideoPlayerProps) => {
@@ -10,7 +10,7 @@ export const VideoPlayer = ({ video }: VideoPlayerProps) => {
       title="video"
       width="100%"
       height="565"
-      src={`https://youtube.com/embed/${video.id}`}
+      src={`https://youtube.com/embed/${video?.id}`}
     ></iframe>
   );
 };

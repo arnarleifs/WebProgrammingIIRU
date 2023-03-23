@@ -4,8 +4,8 @@ import { ChannelAuthorInformationPane } from "../channel-author-information-pane
 import { VideoDescription } from "../video-description/video-description";
 
 interface VideoPlayerInformationPaneProps {
-  video: Video;
-  channel: Channel;
+  video: Video | undefined;
+  channel: Channel | undefined;
 }
 
 export const VideoPlayerInformationPane = ({
@@ -14,7 +14,7 @@ export const VideoPlayerInformationPane = ({
 }: VideoPlayerInformationPaneProps) => {
   return (
     <div>
-      <h3>{video.snippet?.title}</h3>
+      <h3>{video?.snippet.title}</h3>
       <ChannelAuthorInformationPane channel={channel} />
       <VideoDescription video={video} />
     </div>

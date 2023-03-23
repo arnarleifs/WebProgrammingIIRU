@@ -10,8 +10,8 @@ import { Channel } from "../../types/channel";
 
 export const VideoDetailSite = () => {
   const { videoId } = useParams();
-  const [video, setVideo] = useState<Video>();
-  const [channel, setChannel] = useState<Channel>();
+  const [video, setVideo] = useState<Video | undefined>();
+  const [channel, setChannel] = useState<Channel | undefined>();
 
   useEffect(() => {
     if (!videoId) {
