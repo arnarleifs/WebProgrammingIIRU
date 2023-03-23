@@ -3,6 +3,6 @@ import styles from './navigation-bar.module.css';
 
 export const NavigationBar = () => (
   <nav className={styles.navigationBar}>
-    <Link to="/">Food tube</Link>
+    <Link to="/">New tube</Link>
   </nav>
 );
