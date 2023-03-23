@@ -1,4 +1,4 @@
-const API_KEY = "AIzaSyDIeapkQfZcQWE3s18Ap88m4vXM-0vQKHA";
+const API_KEY = "";
 
 export const getMostPopularVideos = async () => {
   try {
