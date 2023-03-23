@@ -1,4 +1,3 @@
-import React from "react";
 import styles from "./gallery-list-item.module.css";
 import { useNavigate } from "react-router-dom";
 import { Video } from "../../types/video";

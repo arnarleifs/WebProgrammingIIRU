@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import styles from "./comments.module.css";
 import { getCommentsByVideoId } from "../../services/you-tube-service";
 import { CommentItem } from "../comment-item/comment-item";

@@ -1,4 +1,3 @@
-import React from "react";
 import styles from "./comment-item.module.css";
 import { CommentSnippet } from "../../types/comment-thread";
 

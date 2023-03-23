@@ -1,4 +1,3 @@
-import React from "react";
 import styles from "./video-description.module.css";
 import { Video } from "../../types/video";
 

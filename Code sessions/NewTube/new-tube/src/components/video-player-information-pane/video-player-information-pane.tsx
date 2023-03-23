@@ -1,4 +1,3 @@
-import React from "react";
 import { Channel } from "../../types/channel";
 import { Video } from "../../types/video";
 import { ChannelAuthorInformationPane } from "../channel-author-information-pane/channel-author-information-pane";

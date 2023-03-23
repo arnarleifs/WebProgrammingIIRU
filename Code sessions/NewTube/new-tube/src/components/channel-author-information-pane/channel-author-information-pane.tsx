@@ -1,4 +1,3 @@
-import React from "react";
 import { Channel } from "../../types/channel";
 import styles from "./channel-author-information-pane.module.css";
 
