@@ -1,6 +1,12 @@
+import React from "react";
 import styles from "./video-description.module.css";
+import { Video } from "../../types/video";
 
-export const VideoDescription = ({ video }) => (
+interface VideoDescriptionProps {
+  video: Video;
+}
+
+export const VideoDescription = ({ video }: VideoDescriptionProps) => (
   <div className={styles.videoDescription}>
     <div>
       <span>

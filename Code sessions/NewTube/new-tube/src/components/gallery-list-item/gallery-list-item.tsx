@@ -1,7 +1,13 @@
+import React from "react";
 import styles from "./gallery-list-item.module.css";
 import { useNavigate } from "react-router-dom";
+import { Video } from "../../types/video";
 
-export const GalleryListItem = ({ item }) => {
+interface GalleryListItemProps {
+  item: Video;
+}
+
+export const GalleryListItem = ({ item }: GalleryListItemProps) => {
   const navigate = useNavigate();
   return (
     <div

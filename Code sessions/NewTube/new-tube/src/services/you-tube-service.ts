@@ -1,12 +1,23 @@
+import { Video } from "../types/video";
+import { Channel } from "../types/channel";
+import { CommentThread } from "../types/comment-thread";
+
 const API_KEY = process.env.REACT_APP_YOUTUBE_KEY;
+
+async function request<TResponse>(
+  url: string,
+  config: RequestInit = {}
+): Promise<TResponse> {
+  const response = await fetch(url, config);
+  const json = await response.json();
+  return json.items as TResponse;
+}
 
 export const getMostPopularVideos = async () => {
   try {
-    const response = await fetch(
+    return await request<Video[]>(
       `https://youtube.googleapis.com/youtube/v3/videos?part=snippet%2CcontentDetails%2Cstatistics&chart=mostPopular&regionCode=US&maxResults=20&key=${API_KEY}`
     );
-    const json = await response.json();
-    return json.items;
   } catch (e) {
     console.error(e);
     return [];
@@ -15,11 +26,10 @@ export const getMostPopularVideos = async () => {
 
 export const getVideoById = async (id) => {
   try {
-    const response = await fetch(
+    const videos = await request<Video[]>(
       `https://youtube.googleapis.com/youtube/v3/videos?part=snippet%2CcontentDetails%2Cstatistics&id=${id}&key=${API_KEY}`
     );
-    const json = await response.json();
-    return json.items[0];
+    return videos[0];
   } catch (e) {
     console.error(e);
     return undefined;
@@ -28,11 +38,10 @@ export const getVideoById = async (id) => {
 
 export const getChannelById = async (id) => {
   try {
-    const response = await fetch(
+    const channels = await request<Channel[]>(
       `https://youtube.googleapis.com/youtube/v3/channels?part=snippet%2CcontentDetails%2Cstatistics&id=${id}&key=${API_KEY}`
     );
-    const json = await response.json();
-    return json.items[0];
+    return channels[0];
   } catch (e) {
     console.error(e);
     return undefined;
@@ -41,11 +50,9 @@ export const getChannelById = async (id) => {
 
 export const getCommentsByVideoId = async (videoId) => {
   try {
-    const response = await fetch(
+    return await request<CommentThread[]>(
       `https://youtube.googleapis.com/youtube/v3/commentThreads?part=snippet%2Creplies&videoId=${videoId}&key=${API_KEY}`
     );
-    const json = await response.json();
-    return json.items;
   } catch (e) {
     console.error(e);
     return [];

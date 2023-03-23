@@ -1,3 +1,4 @@
+import React from "react";
 import styles from "./gallery-list.module.css";
 import { useMostPopularVideos } from "../../hooks/use-most-popular-videos";
 import { GalleryListItem } from "../gallery-list-item/gallery-list-item";
