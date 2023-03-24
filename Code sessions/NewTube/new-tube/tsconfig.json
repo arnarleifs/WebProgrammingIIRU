@@ -1,0 +1,10 @@
+{
+  "compilerOptions": {
+    "esModuleInterop": true,
+    "plugins": [{
+      "name": "typescript-plugin-css-modules"
+    }],
+    "jsx": "react-jsx"
+  },
+  "include": ["src", "declaration.d.ts"]
+}

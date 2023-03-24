@@ -1,6 +1,11 @@
+import { CommentSnippet } from "../../types/comment-thread";
 import styles from "./comment-item.module.css";
 
-export const CommentItem = ({ item }) => (
+interface CommentItemProps {
+  item: CommentSnippet
+}
+
+export const CommentItem = ({ item }: CommentItemProps) => (
   <div className={styles.commentItem}>
     <div
       className={styles.avatar}
