@@ -2,9 +2,14 @@ import { useEffect, useState } from "react";
 import styles from "./comments.module.css";
 import { getCommentsByVideoId } from "../../services/you-tube-service";
 import { CommentItem } from "../comment-item/comment-item";
+import { CommentThread } from "../../types/comment-thread";
 
-export const Comments = ({ videoId }) => {
-  const [comments, setComments] = useState([]);
+interface CommentsProps {
+  videoId: string;
+}
+
+export const Comments = ({ videoId }: CommentsProps) => {
+  const [comments, setComments] = useState<CommentThread[]>([]);
 
   useEffect(() => {
     if (!videoId) {

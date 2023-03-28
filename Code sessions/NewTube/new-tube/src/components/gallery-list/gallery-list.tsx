@@ -7,7 +7,7 @@ export const GalleryList = () => {
   return (
     <div className={styles.gallery}>
       {popularVideos.map((p) => (
-        <GalleryListItem key={p.snippet.title} item={p} />
+        <GalleryListItem key={p.id} item={p} />
       ))}
     </div>
   );
