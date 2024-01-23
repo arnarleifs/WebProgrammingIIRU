@@ -1,0 +1,287 @@
+@import "variables.less";
+
+// General CSS (applies to all screen sizes)
+body {
+  display: grid;
+
+  > main {
+    display: grid;
+
+    #primary-nav {
+      display: grid;
+      background-color: @persianPink;
+      border-bottom: solid 8px @thulianPink;
+      align-items: center;
+      justify-content: center;
+
+      #logo {
+        width: 200px;
+      }
+    }
+
+    #secondary-nav {
+      display: grid;
+      background-color: @spanishPink;
+
+      ul {
+        display: grid;
+        grid-template-columns: repeat(3, 150px);
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+
+        li {
+          a {
+            font-size: 1.5em;
+            font-weight: bold;
+            color: @white;
+          }
+        }
+      }
+    }
+
+    .cities {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+
+      li {
+        display: grid;
+        border: solid 3px @thulianPink;
+        padding: 10px 30px;
+
+        .city-img {
+          grid-area: city-img;
+          background-position: center;
+          background-repeat: no-repeat;
+          background-size: cover;
+          width: 100%;
+          height: 150px;
+          margin-bottom: 10px;
+        }
+
+        .text-wrapper {
+          grid-area: text-wrapper;
+          h2 {
+            font-size: 2em;
+          }
+          p {
+            margin: 0;
+          }
+        }
+      }
+    }
+
+    .banner-area {
+      display: grid;
+      #banner {
+        display: grid;
+        gap: 20px;
+        justify-content: center;
+        text-align: center;
+        padding: 30px 0;
+        color: @white;
+        background-color: @spanishPink;
+
+        h1 {
+          font-size: 2em;
+        }
+
+        ul.city-previews {
+          display: grid;
+
+          li {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            background-position: center;
+            background-repeat: no-repeat;
+            background-size: cover;
+          }
+        }
+      }
+    }
+
+    footer {
+      background-color: @persianPink;
+      border-top: solid 8px @thulianPink;
+    }
+  }
+
+  #right-aside {
+    display: none;
+  }
+}
+
+// Desktop media query
+@media screen and (min-width: 1025px) {
+  body {
+    grid-template-columns: auto 250px;
+
+    > main {
+      grid-template-rows: 0.7fr 0.3fr 1.5fr 1.2fr 0.3fr;
+      .cities {
+        li {
+          grid-template-areas:
+            "city-img"
+            "text-wrapper";
+        }
+      }
+
+      .banner-area {
+        #banner {
+          ul.city-previews {
+            grid-template-columns: repeat(4, 1fr);
+            gap: 60px;
+          }
+        }
+      }
+    }
+
+    #right-aside {
+      display: block !important;
+      background-color: @laurelGreen;
+      border-left: solid 8px @desaturatedCyan;
+      color: @white;
+      padding: @commonPadding;
+      text-align: center;
+
+      img {
+        width: 150px;
+        margin-bottom: 20px;
+      }
+    }
+  }
+
+  #right-aside-inside {
+    display: none;
+  }
+}
+
+// Tablet media query
+@media screen and (max-width: 1024px) and (min-width: 481px) {
+  body {
+    > main {
+      grid-template-rows: 0.4fr 0.15fr 1.2fr 1.2fr 0.2fr;
+      .cities {
+        grid-template-columns: repeat(2, 1fr);
+        li {
+          align-items: center;
+
+          .city-img {
+            width: 250px;
+          }
+
+          .text-wrapper {
+            font-size: 0.6em;
+          }
+
+          &:not(:last-child) {
+            grid-template-areas: "city-img text-wrapper";
+
+            .city-img {
+              width: 200px;
+              height: 150px;
+              margin-right: 20px;
+            }
+          }
+
+          &:last-child {
+            grid-column: 1 / span 2;
+            grid-template-areas: "text-wrapper city-img";
+
+            .city-img {
+              margin-left: 20px;
+            }
+          }
+        }
+      }
+
+      .banner-area {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+
+        #banner {
+          ul.city-previews {
+            grid-template-columns: repeat(2, 1fr);
+            gap: 30px;
+          }
+        }
+
+        #right-aside-inside {
+          display: grid;
+          gap: 20px;
+          align-content: center;
+          justify-items: center;
+          text-align: center;
+          padding: @commonPadding;
+          background-color: @laurelGreen;
+          color: @white;
+          img {
+            width: 150px;
+          }
+        }
+      }
+    }
+  }
+}
+
+// Mobile media query
+@media screen and (max-width: 480px) {
+  html, body {
+    height: 100vh !important;
+  }
+  body {
+    > main {
+      grid-template-rows: 0.5fr 0.2fr auto 0.8fr 0.2fr;
+      ul.cities {
+        grid-template-columns: 1fr;
+        li {
+          align-items: center;
+
+          .city-img {
+            width: 150px;
+            height: 100px;
+          }
+
+          .text-wrapper {
+            font-size: 0.6em;
+          }
+
+          &:nth-child(even) {
+            grid-template-areas: "text-wrapper city-img";
+
+            .city-img {
+              margin-left: 20px;
+            }
+          }
+
+          &:nth-child(odd) {
+            grid-template-areas: "city-img text-wrapper";
+
+            .city-img {
+              margin-right: 20px;
+            }
+          }
+        }
+      }
+
+      .banner-area {
+        #banner {
+          ul.city-previews {
+            grid-template-columns: repeat(4, 1fr);
+            gap: 10px;
+
+            li {
+              width: 100px;
+              height: 100px;
+            }
+          }
+        }
+      }
+    }
+  }
+
+  #right-aside-inside {
+    display: none;
+  }
+}
