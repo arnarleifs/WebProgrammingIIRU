@@ -1,0 +1,82 @@
+body {
+  padding: 0;
+  margin: 0;
+  font-family: "Unbounded", cursive;
+}
+
+.demonstration-card {
+  padding: 60px;
+  border-bottom: solid 8px #ff5964;
+}
+
+.demonstration-card:last-of-type {
+  border-bottom: none;
+}
+
+.header-content {
+  display: flex;
+  gap: 20px;
+}
+
+.bunny-section {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 20px;
+  margin-top: 20px;
+}
+
+.bunny-card {
+  display: grid;
+  background: #8e3f44;
+  padding: 40px;
+  height: 500px;
+  gap: 20px;
+  align-items: center;
+  justify-items: center;
+}
+
+.bunny-container {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  background-color: #ff5964;
+  border-radius: 50%;
+  width: 150px;
+  height: 150px;
+}
+
+.bunny {
+  /* The width of one frame within the spritesheet (The spritesheet has a total of 443 px) */
+  width: 110.75px;
+  height: 109px;
+  background-image: url("../resources/spritesheet.png");
+  background-repeat: no-repeat;
+  background-position: left center;
+}
+
+.bunny.hurt {
+  background-image: url("../resources/hurt.png");
+}
+
+.bunny.out-of-race {
+  background-image: url("../resources/out-of-race.png");
+}
+
+.bunny-message {
+  padding: 20px;
+  background-color: white;
+  border-radius: 10px;
+  width: 200px;
+}
+
+.peeking {
+  animation: peeking 1s steps(3) 1 forwards;
+}
+
+@keyframes peeking {
+  100% {
+    background-position: -332.25px;
+  }
+}
