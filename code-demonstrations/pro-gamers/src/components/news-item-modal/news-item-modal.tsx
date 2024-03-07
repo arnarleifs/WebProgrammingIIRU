@@ -14,7 +14,7 @@ import {
   Textarea,
   Select,
 } from "@chakra-ui/react";
-import { useEffect, useRef } from "react";
+import { useEffect, useState } from "react";
 import { News, NewsCategory } from "../../types/news";
 
 interface NewsItemModalProps {
@@ -25,16 +25,16 @@ interface NewsItemModalProps {
 }
 
 export function NewsItemModal(props: NewsItemModalProps) {
-  const titleRef = useRef<HTMLInputElement>(null);
-  const shortDescriptionRef = useRef<HTMLTextAreaElement>(null);
-  const categoryRef = useRef<HTMLSelectElement>(null);
+  const [title, setTitle] = useState<string>(props.item?.title ?? "");
+  const [shortDescription, setShortDescription] = useState<string>(
+    props.item?.shortDescription ?? ""
+  );
+  const [category, setCategory] = useState<string>(props.item?.category ?? "");
 
   useEffect(() => {
-    if (props.item?.id) {
-      titleRef.current!.value = props.item.title;
-      shortDescriptionRef.current!.value = props.item.shortDescription;
-      categoryRef.current!.value = props.item.category;
-    }
+    setTitle(props.item?.title ?? "");
+    setShortDescription(props.item?.shortDescription ?? "");
+    setCategory(props.item?.category ?? "");
   }, [props.item]);
 
   return (
@@ -46,20 +46,29 @@ export function NewsItemModal(props: NewsItemModalProps) {
         <ModalBody>
           <FormControl marginBottom={5}>
             <FormLabel>Title</FormLabel>
-            <Input ref={titleRef} type="text" />
+            <Input
+              value={title}
+              onChange={(e) => setTitle(e.target.value)}
+              type="text"
+            />
             <FormHelperText>Title of the news item.</FormHelperText>
           </FormControl>
           <FormControl marginBottom={5}>
             <FormLabel>Short description</FormLabel>
             <Textarea
-              ref={shortDescriptionRef}
+              value={shortDescription}
+              onChange={(e) => setShortDescription(e.target.value)}
               placeholder="Short description for the news item"
             />
             <FormHelperText>Short description of the news item.</FormHelperText>
           </FormControl>
           <FormControl marginBottom={5}>
             <FormLabel>Category</FormLabel>
-            <Select ref={categoryRef} placeholder="Select a categoy">
+            <Select
+              value={category}
+              onChange={(e) => setCategory(e.target.value)}
+              placeholder="Select a categoy"
+            >
               <option value={NewsCategory.World}>World</option>
               <option value={NewsCategory.Financial}>Financial</option>
               <option value={NewsCategory.Technology}>Technology</option>
@@ -74,14 +83,14 @@ export function NewsItemModal(props: NewsItemModalProps) {
           <Button
             onClick={() =>
               props.onAdd({
-                title: titleRef.current?.value,
-                shortDescription: shortDescriptionRef.current?.value,
-                category: categoryRef.current?.value as NewsCategory,
+                title,
+                shortDescription,
+                category: category as NewsCategory,
               })
             }
             variant="ghost"
           >
-            Add
+            {props.item ? "Update" : "Add"}
           </Button>
         </ModalFooter>
       </ModalContent>

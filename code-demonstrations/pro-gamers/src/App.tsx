@@ -25,15 +25,28 @@ export function App() {
   );
   const [itemToUpdate, setItemToUpdate] = useState<News>();
 
-  function onAdd(newsItem: Partial<News>) {
-    setItemToUpdate(undefined);
-    const nextId = Math.max(...news.map((n) => n.id)) + 1;
-    const newItem: News = {
-      ...newsItem,
-      id: nextId,
-    } as News;
+  function onSubmit(newsItem: Partial<News>) {
+    if (itemToUpdate) {
+      setNews((news) =>
+        news.map((n) => {
+          if (n.id === itemToUpdate.id) {
+            return {
+              ...n,
+              ...newsItem,
+            };
+          }
+          return n;
+        })
+      );
+    } else {
+      const nextId = Math.max(...news.map((n) => n.id)) + 1;
+      const newItem: News = {
+        ...newsItem,
+        id: nextId,
+      } as News;
 
-    setNews((news) => [...news, newItem]);
+      setNews((news) => [...news, newItem]);
+    }
     onClose();
   }
 
@@ -58,7 +71,10 @@ export function App() {
           leftIcon={<AddIcon />}
           colorScheme="teal"
           variant="solid"
-          onClick={onOpen}
+          onClick={() => {
+            setItemToUpdate(undefined);
+            onOpen();
+          }}
         >
           Add news item
         </Button>
@@ -74,7 +90,7 @@ export function App() {
         />
       </div>
       <NewsItemModal
-        onAdd={onAdd}
+        onAdd={onSubmit}
         isOpen={isOpen}
         onClose={onClose}
         item={itemToUpdate}
