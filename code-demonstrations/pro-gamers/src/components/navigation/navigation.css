@@ -1,0 +1,4 @@
+.navigation-bar-link:hover {
+  cursor: pointer;
+  background-color: rgba(155, 155, 155, .7);
+}
