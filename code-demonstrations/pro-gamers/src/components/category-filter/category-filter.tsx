@@ -1,5 +1,6 @@
 import { RadioGroup, Stack, Radio } from "@chakra-ui/react";
 import { NewsCategory } from "../../types/news";
+import PropTypes from "prop-types";
 
 interface CategoryFilterProps {
   setCategoryFilter: React.Dispatch<React.SetStateAction<NewsCategory>>;
@@ -21,3 +22,11 @@ export function CategoryFilter(props: CategoryFilterProps) {
     </RadioGroup>
   );
 }
+
+CategoryFilter.propTypes = {
+  // This is a function which is called when the filter is modified
+  // to let the parent component know that changes occurred.
+  setCategoryFilter: PropTypes.func.isRequired,
+  // This is the current selected category filter
+  categoryFilter: PropTypes.string.isRequired,
+};

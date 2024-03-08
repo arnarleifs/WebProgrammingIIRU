@@ -16,6 +16,7 @@ import {
 } from "@chakra-ui/react";
 import { useEffect, useState } from "react";
 import { News, NewsCategory } from "../../types/news";
+import PropTypes from "prop-types";
 
 interface NewsItemModalProps {
   item?: News;
@@ -97,3 +98,20 @@ export function NewsItemModal(props: NewsItemModalProps) {
     </Modal>
   );
 }
+
+NewsItemModal.propTypes = {
+  // This is the item which should be used to prepopulate the modal
+  item: PropTypes.shape({
+    id: PropTypes.number.isRequired,
+    title: PropTypes.string.isRequired,
+    shortDescription: PropTypes.string,
+    longDescription: PropTypes.string,
+    category: PropTypes.string.isRequired,
+  }),
+  // This determines if the modal is visible or not.
+  isOpen: PropTypes.bool.isRequired,
+  // Function passed in to notify that the 'Close' button was clicked
+  onClose: PropTypes.func.isRequired,
+  // Function passed in to notify that the 'Add' button was clicked
+  onAdd: PropTypes.func.isRequired,
+};
