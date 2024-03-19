@@ -4,6 +4,7 @@ import { About } from "../views/about";
 import { TopGames } from "../views/top-games";
 import { RootLayout } from "../layouts/root-layout";
 import { NewsDetails } from "../views/news-details";
+import { Subscribe } from "../views/subscribe";
 
 export const AppRouter = () => (
   <BrowserRouter>
@@ -13,6 +14,7 @@ export const AppRouter = () => (
         <Route path="/news/:newsItemId" element={<NewsDetails />} />
         <Route path="/about" element={<About />} />
         <Route path="/topgames" element={<TopGames />} />
+        <Route path="/subscribe" element={<Subscribe />} />
       </Route>
     </Routes>
   </BrowserRouter>
