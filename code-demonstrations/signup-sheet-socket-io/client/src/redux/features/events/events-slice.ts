@@ -25,7 +25,7 @@ export const eventsSlice = createSlice({
   initialState,
   reducers: {
     setEvents: (state, action) => {
-      state = action.payload;
+      state.events = action.payload;
     },
   },
   extraReducers: (builder) => {

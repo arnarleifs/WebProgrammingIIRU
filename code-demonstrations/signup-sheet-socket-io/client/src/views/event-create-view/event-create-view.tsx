@@ -1,4 +1,4 @@
-import { Button, FormControl, FormLabel, Input, Stack } from "@chakra-ui/react";
+import { Button, FormControl, FormLabel, Heading, Input, Stack } from "@chakra-ui/react";
 import { useState } from "react";
 import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
@@ -18,7 +18,7 @@ export function EventCreateView() {
   const createEvent = async () => {
     setErrorMessage("");
 
-    const event = { title, start, end, maximum, host: user };
+    const event = { title, start, end, maximum, host: user! };
     const newEvent = await createNewEvent(event);
 
     if (newEvent) {
@@ -31,7 +31,7 @@ export function EventCreateView() {
 
   return (
     <>
-      <h1>Create an event</h1>
+      <Heading>Create an event</Heading>
       <Stack spacing={2}>
         <FormControl>
           <FormLabel>Title</FormLabel>

@@ -1,4 +1,4 @@
-import { Button } from "@chakra-ui/react";
+import { Button, Heading } from "@chakra-ui/react";
 import moment from "moment";
 import { useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
@@ -20,7 +20,7 @@ export function EventDetailsView() {
     <>
       {event ? (
         <>
-          <h1>{event.title}</h1>
+          <Heading>{event.title}</Heading>
           <Button onClick={() => signupForEvent()}>Signup</Button>
           <div className={hostContainer}>
             <div

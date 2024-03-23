@@ -2,7 +2,8 @@ import { style } from "@vanilla-extract/css";
 
 export const loginContainer = style({
   display: "grid",
-  alignItems: "center",
+  alignContent: "center",
   justifyContent: "center",
   height: "100%",
+  gap: 20
 });

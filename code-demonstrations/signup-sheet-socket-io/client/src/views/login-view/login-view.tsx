@@ -1,5 +1,4 @@
 import {
-  Box,
   Button,
   FormControl,
   FormErrorMessage,
@@ -32,39 +31,35 @@ export function LoginView() {
   const isPasswordError = password.length === 0;
 
   return (
-    <div className={loginContainer}>
-      <Box>
-        <FormControl isInvalid={isUsernameError}>
-          <FormLabel>Username</FormLabel>
-          <Input
-            id="username-input"
-            type="text"
-            value={username}
-            onChange={(evt) => setUsername(evt.target.value)}
-            variant="outline"
-          />
-          {!isUsernameError && (
-            <FormErrorMessage>Username must be provided.</FormErrorMessage>
-          )}
-        </FormControl>
-        <FormControl isInvalid={isPasswordError}>
-          <FormLabel>Password</FormLabel>
-          <Input
-            id="password-input"
-            type="password"
-            value={password}
-            onChange={(evt) => setPassword(evt.target.value)}
-            variant="outline"
-          />
-          {!isPasswordError && (
-            <FormErrorMessage>Password must be provided.</FormErrorMessage>
-          )}
-        </FormControl>
-        <Button onClick={() => submitForm()} variant="flushed">
-          Next
-        </Button>
-        <p>{failedMessage}</p>
-      </Box>
-    </div>
+    <form className={loginContainer}>
+      <FormControl isInvalid={isUsernameError}>
+        <FormLabel>Username</FormLabel>
+        <Input
+          id="username-input"
+          type="text"
+          value={username}
+          onChange={(evt) => setUsername(evt.target.value)}
+          variant="outline"
+        />
+        {!isUsernameError && (
+          <FormErrorMessage>Username must be provided.</FormErrorMessage>
+        )}
+      </FormControl>
+      <FormControl isInvalid={isPasswordError}>
+        <FormLabel>Password</FormLabel>
+        <Input
+          id="password-input"
+          type="password"
+          value={password}
+          onChange={(evt) => setPassword(evt.target.value)}
+          variant="outline"
+        />
+        {!isPasswordError && (
+          <FormErrorMessage>Password must be provided.</FormErrorMessage>
+        )}
+      </FormControl>
+      <Button onClick={() => submitForm()}>Next</Button>
+      <p>{failedMessage}</p>
+    </form>
   );
 }

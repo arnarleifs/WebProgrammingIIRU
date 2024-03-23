@@ -6,7 +6,7 @@ export interface Event {
   title: string;
   start: string;
   end: string;
-  host: User;
+  host: Partial<User>;
   maximum: number;
   attendees: Attendee[];
 }

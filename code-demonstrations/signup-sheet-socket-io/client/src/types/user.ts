@@ -1,1 +1,4 @@
-export interface User {}
+export interface User {
+  avatar: string;
+  displayName: string;
+}

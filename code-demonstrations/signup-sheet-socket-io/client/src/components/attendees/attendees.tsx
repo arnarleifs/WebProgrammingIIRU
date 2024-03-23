@@ -11,7 +11,7 @@ export function Attendees(props: AttendeesProps) {
       <Heading>Attendees</Heading>
       <List>
         {props.attendees.map((a) => (
-          <ListItem key={a.id}>
+          <ListItem key={a._id}>
             <Avatar src={a.avatar} />
             {a.displayName}
           </ListItem>

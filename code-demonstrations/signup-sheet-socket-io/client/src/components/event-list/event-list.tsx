@@ -1,31 +1,64 @@
 import { CalendarIcon } from "@chakra-ui/icons";
-import { Icon, List, ListItem, Text } from "@chakra-ui/react";
+import {
+  Box,
+  Heading,
+  Icon,
+  List,
+  Stack,
+  StackDivider,
+} from "@chakra-ui/react";
+import { Card, CardHeader, CardBody } from "@chakra-ui/react";
 import moment from "moment";
 import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
+import { IRootState } from "../../redux/store";
 
 export function EventList() {
-  const events = useSelector((state) => state.event);
+  const event = useSelector((state: IRootState) => state.event);
   const navigate = useNavigate();
 
-  const navigateToEvent = (id: number) => navigate(`/events/${id}`);
+  const navigateToEvent = (id: string) => navigate(`/events/${id}`);
 
   return (
     <List sx={{ width: "100%", maxWidth: 360, bgcolor: "background.paper" }}>
-      {events.map((e) => (
-        <ListItem
-          style={{ flexDirection: "column" }}
-          onClick={() => navigateToEvent(e._id)}
+      {event.events.map((e) => (
+        <Card
           key={e._id}
-          alignItems="flex-start"
+          onClick={() => navigateToEvent(e._id)}
+          marginTop={10}
+          marginBottom={10}
         >
-          <Icon as={CalendarIcon} />
-          <Text>{e.title}</Text>
-          <Text>{e.host.displayName}</Text>
-          <Text>{`Start time: ${moment(e.start).format("LLL")}`}</Text>
-          <Text>{`End time: ${moment(e.end).format("LLL")}`}</Text>
-          <Text>{`Participants: ${e.attendees.length} / ${e.maximum}`}</Text>
-        </ListItem>
+          <CardHeader>
+            <Heading size="md">
+              <Icon as={CalendarIcon} />
+              {e.title}
+            </Heading>
+          </CardHeader>
+          <CardBody>
+            <Stack divider={<StackDivider />} spacing="4">
+              <Box>
+                <Heading size="xs" textTransform="uppercase">
+                  {e.host.displayName}
+                </Heading>
+              </Box>
+              <Box>
+                <Heading size="xs" textTransform="uppercase">
+                  {`Start time: ${moment(e.start).format("LLL")}`}
+                </Heading>
+              </Box>
+              <Box>
+                <Heading size="xs" textTransform="uppercase">
+                  {`End time: ${moment(e.end).format("LLL")}`}
+                </Heading>
+              </Box>
+              <Box>
+                <Heading size="xs" textTransform="uppercase">
+                  {`Participants: ${e.attendees.length} / ${e.maximum}`}
+                </Heading>
+              </Box>
+            </Stack>
+          </CardBody>
+        </Card>
       ))}
     </List>
   );

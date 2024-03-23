@@ -7,11 +7,12 @@ import { socket } from "../services/socket-service";
 import { IRootState } from "../redux/store";
 import { setUser } from "../redux/features/user/user-slice";
 import { getEvents, setEvents } from "../redux/features/events/events-slice";
+import { ThunkDispatch } from "@reduxjs/toolkit";
 
 export function MainLayout() {
   const user = useSelector((state: IRootState) => state.user);
   const event = useSelector((state: IRootState) => state.event);
-  const dispatch = useDispatch();
+  const dispatch = useDispatch<ThunkDispatch<any, any, any>>();
   const navigate = useNavigate();
 
   // On mount
@@ -60,7 +61,7 @@ export function MainLayout() {
   }, [dispatch, event.events]);
 
   return (
-    <Container>
+    <Container height="100%">
       <Outlet />
     </Container>
   );
