@@ -1,46 +1,32 @@
-import { createSlice, PayloadAction } from "@reduxjs/toolkit";
+import { createAsyncThunk, createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { PokemonListItem } from "../../../types/pokemon-list-item";
 import { Pokemon } from "../../../types/pokemon";
-import { AppDispatch } from "../../store";
 
 const baseUrl = "https://pokeapi.co/api/v2";
 
-export function getPokemons() {
-  return async (dispatch: AppDispatch) => {
-    try {
-      dispatch(getPokemonsLoading());
-      const response = await fetch(`${baseUrl}/pokemon`);
-      if (!response.ok) {
-        throw new Error(await response.text());
-      }
-      const json = await response.json();
-      dispatch(getPokemonsSuccess(json.results));
-    } catch (err: any) {
-      dispatch(getPokemonsError(err.message));
-    }
-  };
-}
+export const getPokemons = createAsyncThunk("get/pokemons", async function () {
+  const response = await fetch(`${baseUrl}/pokemon`);
+  if (!response.ok) {
+    throw new Error(await response.text());
+  }
+  const json = await response.json();
+  return json.results;
+});
 
-export function getPokemonByName(name: string) {
-  return async (dispatch: AppDispatch) => {
-    try {
-      dispatch(getSelectedPokemonLoading());
-      const response = await fetch(`${baseUrl}/pokemon/${name}`);
-      if (!response.ok) {
-        throw new Error(await response.text());
-      }
-      const json = await response.json();
-      dispatch(
-        getSelectedPokemonSuccess({
-          ...json,
-          image: json.sprites["front_default"],
-        })
-      );
-    } catch (err: any) {
-      dispatch(getSelectedPokemonError(err.message));
+export const getPokemonByName = createAsyncThunk(
+  "get/pokemonByName",
+  async function (name: string) {
+    const response = await fetch(`${baseUrl}/pokemon/${name}`);
+    if (!response.ok) {
+      throw new Error(await response.text());
     }
-  };
-}
+    const json = await response.json();
+    return {
+      ...json,
+      image: json.sprites["front_default"],
+    };
+  }
+);
 
 interface PokemonSliceState {
   pokemons: PokemonListItem[];
@@ -60,41 +46,46 @@ const initialState: PokemonSliceState = {
 export const pokemonSlice = createSlice({
   name: "pokemon",
   initialState,
-  reducers: {
-    getPokemonsSuccess: (state, action: PayloadAction<PokemonListItem[]>) => {
-      state.pokemonsIsLoading = false;
-      state.pokemonsError = undefined;
-      state.pokemons = action.payload;
-    },
-    getPokemonsLoading: (state) => {
+  reducers: {},
+  extraReducers: (builder) => {
+    builder.addCase(getPokemons.pending, (state) => {
       state.pokemonsIsLoading = true;
-    },
-    getPokemonsError: (state, action: PayloadAction<string>) => {
+    });
+
+    builder.addCase(getPokemons.rejected, (state, action) => {
+      if (action.payload) {
+        state.pokemonsError = "Could not retrieve Pokémons";
+      }
       state.pokemonsIsLoading = false;
-      state.pokemonsError = action.payload;
-    },
-    getSelectedPokemonSuccess: (state, action: PayloadAction<Pokemon>) => {
-      state.selectedPokemonIsLoading = false;
-      state.selectedPokemonError = undefined;
-      state.selectedPokemon = action.payload;
-    },
-    getSelectedPokemonLoading: (state) => {
+    });
+
+    builder.addCase(
+      getPokemons.fulfilled,
+      (state, action: PayloadAction<PokemonListItem[]>) => {
+        state.pokemonsIsLoading = false;
+        state.pokemons = action.payload;
+      }
+    );
+
+    builder.addCase(getPokemonByName.pending, (state) => {
       state.selectedPokemonIsLoading = true;
-    },
-    getSelectedPokemonError: (state, action: PayloadAction<string>) => {
+    });
+
+    builder.addCase(getPokemonByName.rejected, (state, action) => {
+      if (action.payload) {
+        state.selectedPokemonError = "Could not retrieve Pokémon";
+      }
       state.selectedPokemonIsLoading = false;
-      state.selectedPokemonError = action.payload;
-    },
+    });
+
+    builder.addCase(
+      getPokemonByName.fulfilled,
+      (state, action: PayloadAction<Pokemon>) => {
+        state.selectedPokemonIsLoading = false;
+        state.selectedPokemon = action.payload;
+      }
+    );
   },
 });
-
-const {
-  getPokemonsSuccess,
-  getPokemonsLoading,
-  getPokemonsError,
-  getSelectedPokemonSuccess,
-  getSelectedPokemonLoading,
-  getSelectedPokemonError,
-} = pokemonSlice.actions;
 
 export default pokemonSlice.reducer;
