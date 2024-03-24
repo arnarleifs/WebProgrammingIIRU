@@ -1,15 +1,16 @@
 import { Box, Button, Heading } from "@chakra-ui/react";
-import { useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { AppDispatch, RootState } from "../../redux/store";
+import { increment } from "../../redux/features/counter/counter-slice";
 
 export function Counter() {
-  const [counter, setCounter] = useState<number>(0);
+  const counter = useSelector((state: RootState) => state.counter.value);
+  const dispatch = useDispatch<AppDispatch>();
 
   return (
     <Box>
       <Heading>Current counter: {counter}</Heading>
-      <Button onClick={() => setCounter((counter) => counter + 1)}>
-        Increase
-      </Button>
+      <Button onClick={() => dispatch(increment())}>Increase</Button>
     </Box>
   );
 }
