@@ -1,7 +1,3 @@
-import { useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { AppDispatch, RootState } from "../../redux/store";
-import { getPokemons } from "../../redux/features/pokemon/pokemon-slice";
 import {
   Alert,
   AlertDescription,
@@ -17,36 +13,32 @@ import {
 import { SunIcon } from "@chakra-ui/icons";
 import { useNavigate } from "react-router-dom";
 import _ from "lodash";
+import { useGetPokemonsQuery } from "../../services/pokemon-service";
 
 export function PokemonsView() {
-  const dispatch = useDispatch<AppDispatch>();
   const navigate = useNavigate();
 
-  const { pokemons, pokemonsIsLoading, pokemonsError } = useSelector(
-    (state: RootState) => state.pokemon
-  );
-
-  useEffect(() => {
-    dispatch(getPokemons());
-  }, [dispatch]);
+  const { data: pokemons, isLoading, isError, error } = useGetPokemonsQuery();
 
   return (
     <Box>
-      {pokemonsIsLoading ? (
+      {isLoading ? (
         <Stack>
           <Skeleton height="20px" />
           <Skeleton height="20px" />
           <Skeleton height="20px" />
         </Stack>
-      ) : pokemonsError ? (
+      ) : isError ? (
         <Alert status="error">
           <AlertIcon />
           <AlertTitle>Failed to load Pokémons</AlertTitle>
-          <AlertDescription>{pokemonsError}</AlertDescription>
+          <AlertDescription>
+            {"error" in error ? error.error : ""}
+          </AlertDescription>
         </Alert>
       ) : (
         <List spacing={3}>
-          {pokemons.map((p) => (
+          {pokemons?.map((p) => (
             <ListItem
               key={p.name}
               onClick={() => navigate(`/pokemons/${p.name}`)}

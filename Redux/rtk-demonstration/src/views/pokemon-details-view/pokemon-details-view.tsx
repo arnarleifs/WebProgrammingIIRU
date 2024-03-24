@@ -1,8 +1,4 @@
-import { useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
-import { AppDispatch, RootState } from "../../redux/store";
-import { getPokemonByName } from "../../redux/features/pokemon/pokemon-slice";
 import {
   Alert,
   AlertDescription,
@@ -21,27 +17,28 @@ import {
   Image,
 } from "@chakra-ui/react";
 import _ from "lodash";
+import { useGetPokemonByNameQuery } from "../../services/pokemon-service";
 
 export function PokemonDetailsView() {
   const { pokemonName } = useParams();
-  const dispatch = useDispatch<AppDispatch>();
-  const { selectedPokemon, selectedPokemonIsLoading, selectedPokemonError } =
-    useSelector((state: RootState) => state.pokemon);
 
-  useEffect(() => {
-    dispatch(getPokemonByName(pokemonName ?? ""));
-  }, [dispatch, pokemonName]);
+  const {
+    data: selectedPokemon,
+    isLoading,
+    isError,
+    error,
+  } = useGetPokemonByNameQuery(pokemonName as string);
 
-  return selectedPokemonIsLoading ? (
+  return isLoading ? (
     <Box padding="6" boxShadow="lg" bg="white">
       <SkeletonCircle size="10" />
       <SkeletonText mt="4" noOfLines={4} spacing="4" skeletonHeight="2" />
     </Box>
-  ) : selectedPokemonError ? (
+  ) : isError ? (
     <Alert status="error">
       <AlertIcon />
       <AlertTitle>Failed to load Pokémon</AlertTitle>
-      <AlertDescription>{selectedPokemonError}</AlertDescription>
+      <AlertDescription>{"error" in error ? error.error : ""}</AlertDescription>
     </Alert>
   ) : (
     <Card>
