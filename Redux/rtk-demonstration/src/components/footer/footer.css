@@ -1,0 +1,12 @@
+.footer {
+  position: fixed;
+  bottom: 0;
+  right: 0;
+  left: 0;
+  height: 100px;
+  background-color: rgba(155, 155, 155, 0.6);
+  display: grid;
+  align-items: center;
+  justify-content: start;
+  padding: 0px 40px;
+}
