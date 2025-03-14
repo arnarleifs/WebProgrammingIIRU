@@ -12,6 +12,12 @@ import "./app.css";
 import { NavigationBar } from "./components/navigation-bar/navigation-bar";
 import { Provider } from "./components/ui/provider";
 import { Box } from "@chakra-ui/react";
+import { UserContext } from "./contexts/user-context";
+import { Footer } from "./components/footer/footer";
+import { useState } from "react";
+import type { User } from "./types/user";
+import { ThemeContext } from "./contexts/theme-context";
+import { ThemeVariation } from "./types/theme-variation";
 
 export const links: Route.LinksFunction = () => [
   { rel: "preconnect", href: "https://fonts.googleapis.com" },
@@ -45,13 +51,31 @@ export function Layout({ children }: { children: React.ReactNode }) {
 }
 
 export default function App() {
+  const [theme, setTheme] = useState<string>(ThemeVariation.Dark);
+  const [user, setUser] = useState<User>({
+    profileImage: 'https://static.vecteezy.com/system/resources/thumbnails/035/857/753/small_2x/people-face-avatar-icon-cartoon-character-png.png',
+    username: 'arnarl@ru.is',
+    fullName: 'Arnar Leifsson'
+  });
+
   return (
     <Provider>
-      <NavigationBar />
-      <Box padding={20}>
-        <Outlet />
-      </Box>
-    </Provider>
+      <ThemeContext.Provider value={{
+        theme,
+        toggleTheme: () => setTheme(theme => theme === ThemeVariation.Dark ? ThemeVariation.Light : ThemeVariation.Dark)
+      }}>
+        <UserContext.Provider value={{
+          user,
+          setUser
+        }}>
+          <NavigationBar />
+          <Box padding={20}>
+            <Outlet />
+          </Box>
+          <Footer />
+        </UserContext.Provider>
+      </ThemeContext.Provider>
+    </Provider >
   );
 }
 

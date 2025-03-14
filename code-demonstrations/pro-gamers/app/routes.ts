@@ -5,4 +5,5 @@ export default [
     route("news/:newsItemId", "routes/newsDetails.tsx"),
     route("about", "routes/about.tsx"),
     route("topgames", "routes/topgames.tsx"),
+    route("subscribe", "routes/subscribe.tsx")
 ] satisfies RouteConfig;
