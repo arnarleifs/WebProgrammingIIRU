@@ -1,0 +1,235 @@
+@import "variables.less";
+
+body {
+    display: grid;
+
+    #main {
+        display: grid;
+        nav#primary-nav {
+            display: grid;
+            background-color: @persianPink;
+            border-bottom: solid 8px @thulianPink;
+            justify-content: center;
+            align-items: center;
+
+            img#logo {
+                width: 200px;
+            }
+        }
+
+        nav#secondary-nav {
+            display: grid;
+            background-color: @spanishPink;
+
+            ul {
+                display: grid;
+                grid-template-columns: repeat(3, 150px);
+                align-items: center;
+                justify-content: center;
+                text-align: center;
+
+                li {
+                    a {
+                        font-size: 1.5em;
+                        font-weight: bold;
+                        color: @white;
+                    }
+                }
+            }
+        }
+    }
+}
+
+// Desktop layout
+@media only screen and (min-width: 1025px) {
+    body {
+        grid-template-columns: 1fr 250px;
+    
+        main#main {
+            grid-template-rows: 150px 100px auto 400px auto;
+    
+            ul.cities {
+                display: grid;
+                grid-template-columns: repeat(3, 1fr);
+    
+                li {
+                    padding: @commonPadding;
+                    border: solid 4px @persianPink;
+    
+                    .city-img {
+                        height: 250px;
+                        background-position: center;
+                        background-size: cover;
+                        margin-bottom: 20px;
+                    }
+    
+                    .text-wrapper {
+                        h2 {
+                            font-size: 2em;
+                        }
+                    }
+                }
+            }
+    
+            .banner-area {
+                display: grid;
+                align-items: center;
+                background-color: @spanishPink;
+                
+                #banner {
+                    display: grid;
+                    height: 100%;
+                    h1 {
+                        display: grid;
+                        align-items: center;
+                        text-align: center;
+                        color: @white;
+                        font-size: 3em;
+                        font-weight: bold;
+                    }
+    
+                    ul.city-previews {
+                        display: grid;
+                        grid-template-columns: repeat(4, 300px);
+                        justify-content: center;
+                        align-items: center;
+                        justify-items: center;
+    
+                        li {
+                            width: 150px;
+                            height: 150px;
+                            border-radius: 50%;
+                            background-size: cover;
+                            background-position: center;
+                        }
+                    }
+                }
+    
+                aside#right-aside-inside {
+                    display: none;
+                }
+            }
+    
+            footer {
+                background-color: @persianPink;
+                border-top: solid 8px @thulianPink;
+            }
+        }
+    
+        aside#right-aside {
+            display: grid;
+            padding: @commonPadding;
+            color: @white;
+            background-color: @laurelGreen;
+            border-left: solid 8px @desaturatedCyan;
+            grid-template-rows: 200px auto;
+            text-align: center;
+            font-size: 1.2em;
+    
+            img {
+                width: 150px;
+            }
+        }
+    }   
+}
+
+// Tablet layout
+@media only screen and (min-width: 769px) and (max-width: 1024px) {
+    body {
+        main#main {
+            grid-template-rows: 150px 100px auto 400px auto;
+
+            ul.cities {
+                display: grid;
+                grid-template-columns: repeat(2, 1fr);
+    
+                li {
+                    display: grid;
+                    padding: @commonPadding;
+                    border: solid 4px @persianPink;
+                    gap: 20px;
+    
+                    .city-img {
+                        grid-area: city;
+                        height: 250px;
+                        width: 250px;
+                        background-position: center;
+                        background-size: cover;
+                        margin-bottom: 20px;
+                    }
+    
+                    .text-wrapper {
+                        display: grid;
+                        align-content: center;
+                        grid-area: text-wrapper;
+                        h2 {
+                            font-size: 2em;
+                        }
+
+                        p {
+                            font-size: .8em;
+                        }
+                    }
+
+                    &:not(:last-child) {
+                        grid-template-areas: 
+                        "city text-wrapper";
+                    }
+
+                    &:last-child {
+                        grid-column: 1 / span 2;
+                        grid-template-areas: 
+                        "text-wrapper city";
+                    }
+                }
+            }
+
+            .banner-area {
+                display: grid;
+                grid-template-columns: 1fr 1fr;
+
+                #banner {
+                    background-color: @spanishPink;
+
+                    .city-previews {
+                        display: grid;
+                        grid-template-columns: repeat(2, 1fr);
+
+                        li {
+                            width: 150px;
+                            height: 150px;
+                            border-radius: 50%;
+                            background-size: cover;
+                            background-position: center;
+                        }
+                    }
+                }
+
+                #right-aside-inside {
+                    display: grid;
+                    background-color: @laurelGreen;
+                    padding: @commonPadding;
+                    justify-content: center;
+                    justify-items: center;
+                    align-items: center;
+                    text-align: center;
+                    color: @white;
+
+                    img {
+                        width: 150px;
+                    }
+                }
+            }
+        }
+        #right-aside {
+            display: none;
+        }
+    }
+}
+
+// Mobile layout
+@media only screen and (max-width: 768px) {
+    body {
+        background-color: pink;
+    }
+}

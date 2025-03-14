@@ -1,0 +1,19 @@
+{
+  "name": "template",
+  "version": "1.0.0",
+  "description": "Your job is to create a responsive site which works on all common screen sizes (desktop, tablet & mobile). In the root of the template there are three images (web-desktop.png, web-tablet.png, web-mobile.png) which show how the site should look like in all screen sizes. In order to target these different screen sizes you must use media queries. The look of the website will change depending on which screen size you are looking at, meaning that elements can change location and how big they are, so please carefully notice where all elements are placed on the image.",
+  "main": "gulpfile.js",
+  "scripts": {
+    "start": ".\\node_modules\\.bin\\gulp",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "browser-sync": "^2.27.7",
+    "gulp": "^4.0.2",
+    "gulp-less": "^5.0.0",
+    "path": "^0.12.7"
+  }
+}
