@@ -18,6 +18,7 @@ import { useState } from "react";
 import type { User } from "./types/user";
 import { ThemeContext } from "./contexts/theme-context";
 import { ThemeVariation } from "./types/theme-variation";
+import { Toaster } from "./components/ui/toaster";
 
 export const links: Route.LinksFunction = () => [
   { rel: "preconnect", href: "https://fonts.googleapis.com" },
@@ -72,6 +73,7 @@ export default function App() {
           <Box padding={20}>
             <Outlet />
           </Box>
+          <Toaster />
           <Footer />
         </UserContext.Provider>
       </ThemeContext.Provider>
