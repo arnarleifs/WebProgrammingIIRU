@@ -1,0 +1,15 @@
+@use "sass:color";
+@use "../../styles/variables" as *;
+
+.button {
+  background-color: $gunMetal;
+  color: white;
+  padding: 10px 20px;
+  border: none;
+  border: solid 1px $ivory;
+  transition: background-color 0.5s;
+  &:hover {
+    cursor: pointer;
+    background-color: color.adjust($gunMetal, $lightness: 10%);
+  }
+}
