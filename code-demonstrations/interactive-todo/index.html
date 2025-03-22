@@ -1,0 +1,38 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <link rel="icon" type="image/svg+xml" href="/vite.svg" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/uikit@3.22.4/dist/css/uikit.min.css" />
+  <link rel="stylesheet" href="./global.css" />
+  <title>Todo application</title>
+</head>
+
+<body>
+  <button id="add-btn" uk-toggle="target: #todo-modal" class="uk-button uk-button-secondary uk-width-1-1">Add item</button>
+  <div id="app"></div>
+  <div id="todo-modal" uk-modal>
+    <div class="uk-modal-dialog uk-modal-body">
+      <h2 class="uk-modal-title"></h2>
+      <form>
+        <div class="uk-margin">
+          <input class="uk-input" type="text" name="name" placeholder="Name" aria-label="Name">
+        </div>
+        <div class="uk-margin">
+          <input class="uk-input" type="text" name="description" placeholder="Description" aria-label="Description">
+        </div>
+      </form>
+      <p class="uk-text-right">
+        <button class="submit-btn uk-button uk-button-primary">Submit</button>
+        <button class="uk-button uk-button-danger uk-modal-close" type="button">Close</button>
+      </p>
+    </div>
+  </div>
+  <script src="https://cdn.jsdelivr.net/npm/uikit@3.22.4/dist/js/uikit.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/uikit@3.22.4/dist/js/uikit-icons.min.js"></script>
+  <script type="module" src="/src/main.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,284 @@
+/* Setup layout of front page within the body */
+body {
+    display: grid;
+    grid-template-rows:
+        100px /* Navigation bar */
+        800px /* Hero section */
+        500px /* Information section */
+        auto
+        auto
+        400px;
+}
+
+/* Navigation bar ++ */
+
+nav {
+    display: grid;
+    background-color: #63B4D1;
+}
+
+nav .nav-links {
+    display: grid;
+    justify-content: center;
+    align-items: center;
+    list-style: none;
+    padding-left: 0px;
+    margin: 0;
+    grid-template-columns: repeat(auto-fit, 100px);
+}
+
+nav .nav-links .nav-link {
+    position: relative;
+    display: grid;
+    align-content: center;
+    justify-items: center;
+    height: 100%;
+}
+
+nav .nav-links .nav-link:hover {
+    cursor: pointer;
+}
+
+nav .nav-links .nav-link:hover:after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background-color: white;
+    z-index: 1;
+
+    animation: curtain .3s ease-in-out 1 both;
+}
+
+nav .nav-links .nav-link .nav-link-text {
+    position: absolute;
+    inset: 0;
+    z-index: 2;
+    display: grid;
+    align-self: center;
+    text-align: center;
+    text-transform: uppercase;
+}
+
+/* Navigation bar -- */
+
+/* Hero section ++ */
+
+.hero-section {
+    background-image: url(/resources/hero.jpg);
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: auto 400px;
+}
+
+/* Hero section -- */
+
+/* Info section ++ */
+
+.info-section {
+    display: grid;
+    background-color: #63B4D1;
+    border-top: solid 6px #7699D4;
+    grid-template-columns: repeat(3, 250px);
+    justify-content: space-around;
+    align-items: center;
+    gap: 40px;
+    overflow: hidden;
+}
+
+.info-section .info-section-item {
+    display: grid;
+    gap: 10px;
+    justify-items: center;
+    align-items: center;
+    text-align: center;
+    position: relative;
+    top: -500px;
+}
+
+.info-section .info-section-item img {
+    border-radius: 50%;
+    background-color: white;
+    padding: 10px;
+}
+
+.info-section .info-section-item .info-section-item-title {
+    font-size: 1.3em;
+    font-weight: bold;
+}
+
+.from-top {
+    animation: from-top .5s ease-in-out 1 both;
+}
+
+/* Info section -- */
+
+/* Shout out section ++ */
+.shout-out-section {
+    display: grid;
+    padding: 50px;
+    overflow: hidden;
+}
+
+.shout-out-section img {
+    position: relative;
+    height: 500px;
+}
+
+.shout-out-section .shout-out-section-info {
+    display: grid;
+    justify-content: center;
+    align-content: center;
+    font-size: 1.2em;
+    position: relative;
+    top: -100%;
+}
+
+.shout-out-section .shout-out-section-info .shout-out-section-item-title {
+    font-size: 2em;
+    font-weight: bold;
+}
+
+.shout-out-section.left {
+    grid-template-columns: 1fr 2fr;
+}
+
+.shout-out-section.left img {
+    left: -100%;
+}
+
+.shout-out-section.right {
+    grid-template-columns: 2fr 1fr;
+}
+
+.shout-out-section.right img {
+    right: -100%;
+}
+
+.shout-out-section.purple {
+    background-color: #9448BC;
+    border-top: solid 6px #480355;
+    color: white;
+}
+
+.from-left {
+    animation: from-left .7s ease-in-out 1 both;
+    animation-delay: .5s;
+}
+
+.from-right {
+    animation: from-right .7s ease-in-out 1 both;
+    animation-delay: .5s;
+}
+
+/* Shout out section -- */
+
+/* Book now section ++ */
+
+.book-now-section {
+    display: grid;
+    background-color: #90FCF9;
+    align-items: center;
+    justify-content: center;
+}
+
+/* Book now section -- */
+
+/* Button section ++ */
+
+button {
+    padding: 10px 20px;
+    border: solid 3px white;
+    text-transform: capitalize;
+    font-family: 'Bitter', serif;
+    font-size: 1.3em;
+    color: white;
+    background-color: transparent;
+    position: relative;
+    transition: transform 1s;
+}
+
+button:hover {
+    cursor: pointer;
+    transform: perspective(400px) rotateY(30deg) scale(1.1);
+}
+
+button:hover:after {
+    content: '';
+    position: absolute;
+    inset: -3px;
+    background: 
+        linear-gradient(#7699D4, #7699D4),
+        linear-gradient(#7699D4, #7699D4),
+        linear-gradient(#7699D4, #7699D4),
+        linear-gradient(#7699D4, #7699D4);
+    background-size: 0 3px, 3px 0, 0 3px, 3px 0;
+    background-position: left top, right top, right bottom, left bottom;
+    background-repeat: no-repeat;
+    animation: button-hover .6s ease-in-out 1 both;
+}
+
+/* Button section -- */
+
+/* Animations ++ */
+
+@keyframes curtain {
+    from {
+        top: 100%;
+    }
+    to {
+        top: 0;
+    }
+}
+
+@keyframes from-top {
+    from {
+        top: -500px;
+    }
+    to {
+        top: 0;
+    }
+}
+
+@keyframes from-left {
+    0% {
+        left: -100%;
+    }
+    60% {
+        left: 400px;
+    }
+    100% {
+        left: 200px;
+    }
+}
+
+@keyframes from-right {
+    0% {
+        right: -100%;
+    }
+    60% {
+        right: 400px;
+    }
+    100% {
+        right: 200px;
+    }
+}
+
+@keyframes button-hover {
+    0% {
+        background-size: 0 3px, 3px 0, 0 3px, 3px 0;
+    }
+    25% {
+        background-size: 100% 3px, 3px 0, 0 3px, 3px 0;
+    }
+    50% {
+        background-size: 100% 3px, 3px 100%, 0 3px, 3px 0;
+    }
+    75% {
+        background-size: 100% 3px, 3px 100%, 100% 3px, 3px 0;
+    }
+    100% {
+        background-size: 100% 3px, 3px 100%, 100% 3px, 3px 100%;
+    }
+}
+
+/* Animations -- */
