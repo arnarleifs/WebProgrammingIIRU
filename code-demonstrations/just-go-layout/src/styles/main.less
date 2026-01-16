@@ -1,0 +1,305 @@
+@import "variables.less";
+
+body {
+  display: grid;
+
+  main#main {
+    display: grid;
+
+    nav#primary-nav {
+      display: grid;
+      background-color: @persianPink;
+      border-bottom: solid 8px @thulianPink;
+
+      justify-content: center;
+      align-items: center;
+    }
+
+    nav#secondary-nav {
+      display: grid;
+      background-color: @spanishPink;
+
+      ul {
+        display: grid;
+        grid-template-columns: repeat(3, 200px);
+        justify-content: center;
+        align-items: center;
+        text-align: center;
+        
+        li {
+          a {
+            color: @white;
+            font-size: 1.5em;
+            font-weight: bold;
+          }
+        }
+      }
+    }
+
+    ul.cities {
+      display: grid;
+      
+      li {
+        padding: @commonPadding;
+        border: solid 4px @persianPink;
+        .city-img {
+          background-color: black;
+          background-position: center;
+          background-size: cover;
+          background-repeat: no-repeat;
+          margin-bottom: 20px;
+        }
+
+        .text-wrapper {
+          h2 {
+            font-size: 2em;
+            font-weight: bold;
+          }
+          p {
+            font-size: .8em;
+          }
+        }
+      }
+    }
+
+    .banner-area {
+      display: grid;
+      #banner {
+        display: grid;
+        grid-template-rows: 100px auto;
+        background-color: @spanishPink;
+        h1 {
+          color: @white;
+          text-align: center;
+          margin-top: 40px;
+        }
+        .city-previews {
+          display: grid;
+          justify-items: center;
+          align-items: center;
+
+          li {
+            border-radius: 50%;
+            background-position: center;
+            background-size: cover;
+          }
+        }
+      }
+    }
+
+    footer {
+      background-color: @persianPink;
+      border-top: solid 8px @thulianPink;
+    }
+  }
+}
+
+// Desktop layout
+@media only screen and (min-width: 1025px) {
+  body {
+    grid-template-columns: auto 250px;
+    main#main {
+      grid-template-rows: 150px 100px 400px auto 100px;
+
+      ul.cities {
+        grid-template-columns: repeat(3, 1fr);
+
+        li {
+          .city-img {
+            width: 80%;
+            height: 150px;
+          }
+        }
+      }
+
+      .banner-area {
+        display: grid;
+        #banner {
+          h1 {
+            font-size: 3em;
+          }
+          .city-previews {
+            grid-template-columns: repeat(4, 1fr);
+  
+            li {
+              height: 250px;
+              width: 250px;
+            }
+          }
+        }
+        aside#right-aside-inside {
+          display: none;
+        }
+      }
+    }
+
+    aside#right-aside {
+      display: grid;
+      background-color: @laurelGreen;
+      border-left: solid 8px @desaturatedCyan;
+      justify-items: center;
+      grid-template-rows: 200px auto;
+      padding: @commonPadding;
+  
+      img {
+        width: 150px;
+      }
+  
+      p {
+        text-align: center;
+        color: @white;
+        font-size: 1.2em;
+      }
+    }
+  }
+}
+
+// Tablet layout
+@media only screen and (max-width: 1024px) and (min-width: 769px) {
+  body {
+    main#main {
+      grid-template-rows: 150px 100px auto auto 100px;
+
+      ul.cities {
+        grid-template-columns: repeat(2, 1fr);
+        
+        li {
+          display: grid;
+          gap: 10px;
+
+          &:last-child {
+            grid-template-areas: "city-text city-img";
+            grid-column: 1 / span 2;
+          }
+
+          &:not(last-child) {
+            grid-template-areas: "city-img city-text";
+          }
+
+          .city-img {
+            grid-area: city-img;
+            width: 150px;
+            height: 150px;
+          }
+  
+          .text-wrapper {
+            display: grid;
+            align-content: center;
+            grid-area: city-text;
+            p {
+              font-size: .6em;
+            }
+          }
+        }
+      }
+
+      .banner-area {
+        grid-template-columns: 1fr 1fr;
+        #banner {
+          h1 {
+            font-size: 2em;
+          }
+          .city-previews {
+            grid-template-columns: repeat(2, 1fr);
+  
+            li {
+              height: 100px;
+              width: 100px;
+            }
+          }
+        }
+        aside#right-aside-inside {
+          display: grid;
+          justify-items: center;
+          align-items: center;
+          background-color: @laurelGreen;
+          img {
+            width: 150px;
+          }
+          p {
+            align-self: flex-start;
+            color: @white;
+            text-align: center;
+          }
+        }
+      }
+    }
+
+    aside#right-aside {
+      display: none;
+    }
+  }
+}
+
+// Mobile layout
+@media only screen and (max-width: 768px) {
+  body {
+    main#main {
+      grid-template-rows: 150px 100px auto 250px 100px;
+      .banner-area {
+        display: grid;
+        #banner {
+          h1 {
+            font-size: 3em;
+          }
+          .city-previews {
+            grid-template-columns: repeat(4, 1fr);
+  
+            li {
+              height: 150px;
+              width: 150px;
+            }
+          }
+        }
+        aside#right-aside-inside {
+          display: none;
+        }
+      }
+
+      ul.cities {
+        li {
+          display: grid;
+          align-items: center;
+          gap: 20px;
+          &:nth-child(even) {
+            grid-template-areas: "city-text city-img";
+          }
+
+          &:nth-child(odd) {
+            grid-template-areas: "city-img city-text";
+          }
+
+          .city-img {
+            grid-area: city-img;
+            height: 150px;
+            width: 150px;
+          }
+  
+          .text-wrapper {
+            grid-area: city-text;
+            p {
+              font-size: .6em;
+            }
+          }
+        }
+      }
+      .banner-area {
+        #banner {
+          h1 {
+            font-size: 2em;
+          }
+          .city-previews {
+  
+            li {
+              height: 100px;
+              width: 100px;
+            }
+          }
+        }
+      }
+    }
+    aside#right-aside {
+      display: none;
+    }
+  }
+}
