@@ -29,15 +29,12 @@ function setScrollBreakpoint(key, elem) {
 }
 
 function showInfoSection(scrollPosition) {
-  if (
-    !state.infoSectionDisplayed &&
-    scrollPosition > state.infoSectionScrollBreakpoint
-  ) {
-    const infoSectionItems = document.querySelectorAll('.info-section-item');
-
-    infoSectionItems.forEach((elem, idx) => {
-      elem.style.animationDelay = `${idx}s`;
+  if (!state.infoSectionDisplayed && scrollPosition > state.infoSectionScrollBreakpoint) {
+    const infoSections = document.querySelectorAll('.features__item');
+    infoSections.forEach((elem, idx) => {
       elem.classList.add('from-top');
+      const animationDelay = idx === 0 ? 0 : idx / 2;
+      elem.style.animationDelay = `${animationDelay}s`;
     });
 
     state.infoSectionDisplayed = true;
@@ -45,28 +42,21 @@ function showInfoSection(scrollPosition) {
 }
 
 function showShoutOutSection(scrollPosition, startPosition, childNumberIndex) {
-  if (
-    !state.shoutOutSectionDisplayed[childNumberIndex] &&
-    scrollPosition > startPosition
-  ) {
-    const shoutOutItem = document.querySelectorAll('.shout-out-section')[childNumberIndex];
-    const img = shoutOutItem.querySelector('img');
-    const textSection = shoutOutItem.querySelector('.shout-out-section-info');
+  if (scrollPosition > startPosition && !state.shoutOutSectionDisplayed[childNumberIndex]) {
+    const promotionImage = document.querySelectorAll('.promo__image')[childNumberIndex];
+    const promotionContent = document.querySelectorAll('.promo__content')[childNumberIndex];
 
-    if (childNumberIndex === 0) {
-      img.classList.add('from-left');
-    } else {
-      img.classList.add('from-right');
-    }
-    
-    textSection.classList.add('from-top');
+    const animationClass = childNumberIndex === 0 ? 'from-left' : 'from-right';
+
+    promotionImage.classList.add(animationClass);
+    promotionContent.classList.add('from-top');
 
     state.shoutOutSectionDisplayed[childNumberIndex] = true;
   }
 }
 
 function updateScrollDisplay(scrollPosition) {
-  document.querySelector(".current-scroll").innerHTML = scrollPosition;
+  document.querySelector(".scroll-tracker").innerHTML = scrollPosition;
 }
 
 document.addEventListener("scroll", function (e) {

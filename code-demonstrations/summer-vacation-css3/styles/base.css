@@ -1,41 +1,50 @@
-/* Setup layout of front page within the body */
+:root {
+  --navigation-bar-height: 100px;
+  --hero-section-height: 800px;
+  --features-height: 500px;
+  --promo-section-height: auto;
+  --cta-section-height: 400px;
+  --hero-section-image-height: 700px;
+  --info-section-item-width: 250px;
+  --promo-image-height: 400px;
+
+  --main-blue-color: #63B4D1;
+  --secondary-blue-color: #7699D4;
+  --main-white-color: #ffffff;
+  --main-purple-color: #9448BC;
+  --secondary-purple-color: #480355;
+  --main-green-color: #90FCF9;
+}
+
 body {
   display: grid;
-  /* 
-      1. Nav 
-      2. Hero 
-      3. Features 
-      4. Promo 1 
-      5. Promo 2 
-      6. CTA 
-    */
   grid-template-rows:
-    100px
-    800px
-    500px
-    auto
-    auto
-    400px;
+    var(--navigation-bar-height)
+    var(--hero-section-height)
+    var(--features-height)
+    var(--promo-section-height)
+    var(--promo-section-height)
+    var(--cta-section-height);
 }
 
 /* Navigation bar ++ */
 
 .nav {
   display: grid;
-  background-color: #63b4d1;
+  background-color: var(--main-blue-color);
 }
 
-.nav__list {
+.nav .nav__list {
   display: grid;
-  justify-content: center;
-  align-items: center;
   list-style: none;
-  padding-left: 0px;
+  padding-left: 0;
+  align-items: center;
+  justify-content: center;
   margin: 0;
   grid-template-columns: repeat(auto-fit, 100px);
 }
 
-.nav__item {
+.nav .nav__list .nav__item {
   position: relative;
   display: grid;
   align-content: center;
@@ -48,21 +57,21 @@ body {
 }
 
 .nav__item:hover:after {
-  content: "";
+  content: '';
   position: absolute;
   inset: 0;
-  background-color: white;
+  background-color: var(--main-white-color);
+  animation: from-bottom .3s ease-in-out 1 both;
   z-index: 1;
-  animation: curtain 0.3s ease-in-out 1 both;
 }
 
 .nav__link-text {
   position: absolute;
   inset: 0;
-  z-index: 2;
   display: grid;
   align-self: center;
   text-align: center;
+  z-index: 2;
   text-transform: uppercase;
 }
 
@@ -71,10 +80,10 @@ body {
 /* Hero section ++ */
 
 .hero {
-  background-image: url(/resources/hero.jpg);
+  background-image: url(../resources/hero.jpg);
   background-repeat: no-repeat;
   background-position: center;
-  background-size: auto 400px;
+  background-size: var(--hero-section-image-height);
 }
 
 /* Hero section -- */
@@ -82,40 +91,38 @@ body {
 /* Features section ++ */
 
 .features {
+  background-color: var(--main-blue-color);
+  border-top: solid 8px var(--secondary-blue-color);
   display: grid;
-  background-color: #63b4d1;
-  border-top: solid 6px #7699d4;
-  grid-template-columns: repeat(3, 250px);
+  grid-template-columns: repeat(3, var(--info-section-item-width));
   justify-content: space-around;
   align-items: center;
-  gap: 40px;
   overflow: hidden;
 }
 
 .features__item {
   display: grid;
-  gap: 10px;
   justify-items: center;
   align-items: center;
   text-align: center;
+  gap: 10px;
   position: relative;
-  top: -500px;
+  top: -100%;
 }
 
 .features__image {
   border-radius: 50%;
-  background-color: white;
+  background-color: var(--main-white-color);
   padding: 10px;
 }
 
 .features__title {
-  font-size: 1.3em;
   font-weight: bold;
+  font-size: 1.3em;
 }
 
-/* Utility class for animation */
 .from-top {
-  animation: from-top 0.5s ease-in-out 1 both;
+  animation: from-top .5s ease-in-out 1 both;
 }
 
 /* Features section -- */
@@ -125,13 +132,13 @@ body {
 .promo {
   display: grid;
   padding: 50px;
-  overflow: hidden;
   grid-template-columns: 1fr 2fr;
+  overflow: hidden;
 }
 
 .promo__image {
   position: relative;
-  height: 500px;
+  height: var(--promo-image-height);
   left: -100%;
 }
 
@@ -149,9 +156,14 @@ body {
   font-weight: bold;
 }
 
-/* Modifier: Reverse Layout */
+.promo--purple {
+  border-top: solid 8px var(--secondary-purple-color);
+  background-color: var(--main-purple-color);
+}
+
 .promo--reverse {
   grid-template-columns: 2fr 1fr;
+  color: var(--main-white-color);
 }
 
 .promo--reverse .promo__image {
@@ -159,22 +171,14 @@ body {
   right: -100%;
 }
 
-/* Modifier: Purple Color Scheme */
-.promo--purple {
-  background-color: #9448bc;
-  border-top: solid 6px #480355;
-  color: white;
-}
-
-/* Animation Utilities */
 .from-left {
-  animation: from-left 0.7s ease-in-out 1 both;
-  animation-delay: 0.5s;
+  animation: from-left .5s ease-in-out 1 both;
+  animation-delay: .7s;
 }
 
 .from-right {
-  animation: from-right 0.7s ease-in-out 1 both;
-  animation-delay: 0.5s;
+  animation: from-right .5s ease-in-out 1 both;
+  animation-delay: .7s;
 }
 
 /* Promo section -- */
@@ -183,24 +187,21 @@ body {
 
 .cta {
   display: grid;
-  background-color: #90fcf9;
+  background-color: var(--main-green-color);
   align-items: center;
   justify-content: center;
 }
 
-/* CTA section -- */
-
-/* Button section ++ */
-
 .cta__button {
   padding: 10px 20px;
-  border: solid 3px white;
-  text-transform: capitalize;
-  font-family: "Bitter", serif;
+  border: solid 3px var(--main-white-color);
+  text-transform: uppercase;
+  font-family: 'Bitter', serif;
   font-size: 1.3em;
-  color: white;
+  color: var(--main-white-color);
   background-color: transparent;
   position: relative;
+
   transition: transform 1s;
 }
 
@@ -210,31 +211,30 @@ body {
 }
 
 .cta__button:hover:after {
-  content: "";
+  content: '';
   position: absolute;
   inset: -3px;
-  background:
-    linear-gradient(#7699d4, #7699d4), linear-gradient(#7699d4, #7699d4),
-    linear-gradient(#7699d4, #7699d4), linear-gradient(#7699d4, #7699d4);
-  background-size:
-    0 3px,
-    3px 0,
-    0 3px,
-    3px 0;
-  background-position:
-    left top,
-    right top,
-    right bottom,
-    left bottom;
+  background: 
+    linear-gradient(var(--secondary-blue-color), var(--secondary-blue-color)),
+    linear-gradient(var(--secondary-blue-color), var(--secondary-blue-color)),
+    linear-gradient(var(--secondary-blue-color), var(--secondary-blue-color)),
+    linear-gradient(var(--secondary-blue-color), var(--secondary-blue-color));
+  background-size: 0 3px, 3px 0, 0 3px, 3px 0;
+  background-position: left top, right top, right bottom, left bottom;
   background-repeat: no-repeat;
-  animation: button-hover 0.6s ease-in-out 1 both;
+
+  animation: button-hover .7s linear 1 both;
 }
+
+/* CTA section -- */
+
+/* Button section ++ */
 
 /* Button section -- */
 
 /* Animations ++ */
 
-@keyframes curtain {
+@keyframes from-bottom {
   from {
     top: 100%;
   }
@@ -245,7 +245,7 @@ body {
 
 @keyframes from-top {
   from {
-    top: -500px;
+    top: -100%;
   }
   to {
     top: 0;
@@ -257,10 +257,10 @@ body {
     left: -100%;
   }
   60% {
-    left: 400px;
+    left: 30%;
   }
   100% {
-    left: 200px;
+    left: 0;
   }
 }
 
@@ -269,48 +269,28 @@ body {
     right: -100%;
   }
   60% {
-    right: 400px;
+    right: 30%;
   }
   100% {
-    right: 200px;
+    right: 0;
   }
 }
 
 @keyframes button-hover {
   0% {
-    background-size:
-      0 3px,
-      3px 0,
-      0 3px,
-      3px 0;
+    background-size: 0 3px, 3px 0, 0 3px, 3px 0;
   }
   25% {
-    background-size:
-      100% 3px,
-      3px 0,
-      0 3px,
-      3px 0;
+    background-size: 100% 3px, 3px 0, 0 3px, 3px 0;
   }
   50% {
-    background-size:
-      100% 3px,
-      3px 100%,
-      0 3px,
-      3px 0;
+    background-size: 100% 3px, 3px 100%, 0 3px, 3px 0;
   }
   75% {
-    background-size:
-      100% 3px,
-      3px 100%,
-      100% 3px,
-      3px 0;
+    background-size: 100% 3px, 3px 100%, 100% 3px, 3px 0;
   }
   100% {
-    background-size:
-      100% 3px,
-      3px 100%,
-      100% 3px,
-      3px 100%;
+    background-size: 100% 3px, 3px 100%, 100% 3px, 3px 100%;
   }
 }
 
