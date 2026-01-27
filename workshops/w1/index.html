@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>The Chained Warrior</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <div class="game-container">
+      <h1>The Chained Warrior</h1>
+      <div id="map" class="map">
+        <div id="hero" class="hero">🧝</div>
+        <div class="tree" style="grid-column: 4; grid-row: 4">🌲</div>
+        <div class="tree" style="grid-column: 7; grid-row: 2">🌲</div>
+        <div class="tree" style="grid-column: 2; grid-row: 8">🌲</div>
+        <div id="monster" class="monster" style="grid-column: 6; grid-row: 6">
+          👹
+        </div>
+      </div>
+
+      <div class="controls">
+        <button onclick="runAdventure()">Run Adventure Chain</button>
+        <div id="log">Status: Idle</div>
+      </div>
+    </div>
+
+    <script src="warrior.js"></script>
+    <script>
+      function runAdventure() {
+        const link = new Warrior("#hero");
+        const ganon = new Monster("#monster");
+
+        console.log(link);
+
+        link
+          .moveRight()
+          .moveRight()
+          .moveRight()
+          .moveRight()
+          .moveDown()
+          .moveDown()
+          .moveDown()
+          .moveDown()
+          .moveDown()
+          .spin()
+          .attack(ganon)
+          .attack(ganon)
+          .attack(ganon)
+          .drinkPotion();
+      }
+    </script>
+  </body>
+</html>
