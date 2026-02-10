@@ -1,0 +1,19 @@
+{
+  "name": "2-pokemon-kart",
+  "private": true,
+  "version": "0.0.0",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "tsc && vite build",
+    "preview": "vite preview"
+  },
+  "devDependencies": {
+    "@types/canvas-confetti": "^1.9.0",
+    "typescript": "~5.9.3",
+    "vite": "^7.2.4"
+  },
+  "dependencies": {
+    "canvas-confetti": "^1.9.4"
+  }
+}
