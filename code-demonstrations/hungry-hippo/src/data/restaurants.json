@@ -1,0 +1,162 @@
+[
+  {
+    "name": "McDonald's",
+    "rating": 3.8,
+    "categories": ["Burgers", "Fries", "Chicken"],
+    "isFavorite": false,
+    "menuItems": [
+      {
+        "id": "mcd-1",
+        "title": "Big Mac",
+        "description": "Two all-beef patties, special sauce, lettuce, cheese.",
+        "price": 950,
+        "imageUrl": "https://s7d1.scene7.com/is/image/mcdonalds/DC_202302_0005-999_BigMac_1564x1564-1:product-header-mobile?wid=1313&hei=1313&dpr=off",
+        "category": "Burgers"
+      },
+      {
+        "id": "mcd-1b",
+        "title": "Quarter Pounder with Cheese",
+        "description": "A quarter pound of 100% fresh beef that's hot, deliciously juicy and cooked when you order.",
+        "price": 1050,
+        "imageUrl": "https://s7d1.scene7.com/is/image/mcdonalds/DC_202201_0007-005_QuarterPounderwithCheese_1564x1564-1:product-header-mobile?wid=1313&hei=1313&dpr=off",
+        "category": "Burgers"
+      },
+      {
+        "id": "mcd-1c",
+        "title": "Double Cheeseburger",
+        "description": "Two 100% pure beef patties seasoned with just a pinch of salt and pepper.",
+        "price": 650,
+        "imageUrl": "https://s7d1.scene7.com/is/image/mcdonalds/DC_202411_0004-999_DoubleCheeseburger_Alt_McValueRegistered_1564x1564?wid=1564&hei=1564&dpr=off",
+        "category": "Burgers"
+      },
+      {
+        "id": "mcd-2",
+        "title": "McNuggets (10pc)",
+        "description": "Tender, juicy chicken breast nuggets.",
+        "price": 1100,
+        "imageUrl": "https://s7d1.scene7.com/is/image/mcdonaldsstage/DC_202208_5280_10McNuggets_Stacked_1564x1564?wid=1564&hei=1564&dpr=off",
+        "category": "Chicken"
+      },
+      {
+        "id": "mcd-2b",
+        "title": "McChicken",
+        "description": "It’s a classic for a reason. Savor the crispy chicken you love.",
+        "price": 750,
+        "imageUrl": "https://s7d1.scene7.com/is/image/mcdonalds/DC_202411_4314-999_McChicken_McValueRegistered_1564x1564?wid=1564&hei=1564&dpr=off",
+        "category": "Chicken"
+      },
+      {
+        "id": "mcd-2c",
+        "title": "McCrispy",
+        "description": "Southern-style fried chicken fillet on a toasted potato roll.",
+        "price": 1250,
+        "imageUrl": "https://s7d1.scene7.com/is/image/mcdonalds/DC_202012_0383_CrispyChickenSandwich_PotatoBun_1564x1564-1?wid=1000&hei=1000&dpr=off",
+        "category": "Chicken"
+      },
+      {
+        "id": "mcd-3b",
+        "title": "Small Fries",
+        "description": "A perfect snack size.",
+        "price": 350,
+        "imageUrl": "https://s7d1.scene7.com/is/image/mcdonalds/DC_202411_6050_SmallFrenchFries_Standing_McValueRegistered_1564x1564?wid=1564&hei=1564&dpr=off",
+        "category": "Fries"
+      },
+      {
+        "id": "mcd-3",
+        "title": "Medium Fries",
+        "description": "World famous fries.",
+        "price": 550,
+        "imageUrl": "https://s7d1.scene7.com/is/image/mcdonalds/DC_202002_8932_MediumFries_1564x1564-1?wid=1564&hei=1564&dpr=off",
+        "category": "Fries"
+      },
+      {
+        "id": "mcd-3c",
+        "title": "Large Fries",
+        "description": "Enough to share (or not).",
+        "price": 650,
+        "imageUrl": "https://s7d1.scene7.com/is/image/mcdonalds/DC_202002_6053_LargeFries_1564x1564-1?wid=1564&hei=1564&dpr=off",
+        "category": "Fries"
+      }
+    ]
+  },
+  {
+    "name": "Wendy's",
+    "rating": 4.2,
+    "categories": ["Burgers", "Dessert", "Sides"],
+    "isFavorite": true,
+    "menuItems": [
+      {
+        "id": "wen-1",
+        "title": "Baconator",
+        "description": "Half-pound of fresh beef, six strips of applewood smoked bacon.",
+        "price": 1450,
+        "imageUrl": "https://app.wendys.com/unified/assets/menu/cropped/4_medium_US_en.png",
+        "category": "Burgers"
+      },
+      {
+        "id": "wen-2",
+        "title": "Spicy Chicken Sandwich",
+        "description": "A juicy chicken breast marinated and breaded in our unique, fiery blend of peppers and spices.",
+        "price": 1250,
+        "imageUrl": "https://app.wendys.com/unified/assets/menu/cropped/119_medium_US_en.png",
+        "category": "Chicken"
+      },
+      {
+        "id": "wen-3",
+        "title": "Chocolate Frosty",
+        "description": "Cool, creamy, and refreshing.",
+        "price": 450,
+        "imageUrl": "https://app.wendys.com/unified/assets/menu/cropped/38_medium_US_en.png",
+        "category": "Dessert"
+      }
+    ]
+  },
+  {
+    "name": "KFC",
+    "rating": 3.9,
+    "categories": ["Chicken", "Bucket", "Sides"],
+    "isFavorite": false,
+    "menuItems": [
+      {
+        "id": "kfc-1",
+        "title": "8 Piece Bucket",
+        "description": "8 pieces of our Original Recipe chicken.",
+        "price": 3500,
+        "imageUrl": "https://d3ed0bx5qudxt4.cloudfront.net/912123675",
+        "category": "Bucket"
+      },
+      {
+        "id": "kfc-2",
+        "title": "Zinger Burger",
+        "description": "100% chicken breast fillet, coated in Zinger breading.",
+        "price": 1150,
+        "imageUrl": "https://d3ed0bx5qudxt4.cloudfront.net/912123226",
+        "category": "Chicken"
+      }
+    ]
+  },
+  {
+    "name": "Popeyes",
+    "rating": 4.5,
+    "categories": ["Chicken", "Sandwich", "Sides"],
+    "isFavorite": false,
+    "menuItems": [
+      {
+        "id": "pop-1",
+        "title": "Chicken Sandwich",
+        "description": "The sandwich that broke the internet.",
+        "price": 1350,
+        "imageUrl": "https://www.popeyes.com/images/czqk28jt/prod_plk_us/3e04cf76b6993b2a4e8d276197831fc49f97c794-2000x1333.png?w=864&q=70&fit=max&auto=format",
+        "category": "Sandwich"
+      },
+      {
+        "id": "pop-2",
+        "title": "Cajun Fries",
+        "description": "They may look like french fries, but our special seasoning makes them 100% Cajun.",
+        "price": 600,
+        "imageUrl": "https://www.popeyes.com/images/czqk28jt/prod_plk_us/98753edc87425e1d86d027997bd0e181d85d8da9-870x570.png?q=70&auto=format",
+        "category": "Sides"
+      }
+    ]
+  }
+]
