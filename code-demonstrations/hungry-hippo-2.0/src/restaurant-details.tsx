@@ -1,38 +1,19 @@
-import restaurants from "@hungry-hippo/data/restaurants.json";
-import { useEffect, useMemo, useState } from "react";
-import type { Restaurant } from "@hungry-hippo/types";
+import { useMemo, useState } from "react";
 import Header from "@hungry-hippo/components/header";
 import CategoryFilter from "@hungry-hippo/components/category-filter";
 import MenuList from "@hungry-hippo/components/menu-list";
 import CartFooter from "@hungry-hippo/components/cart-footer";
 import Spinner from "./ui/spinner";
-
-const restaurantEntry = restaurants.find(
-  (r) => r.name === "McDonald's",
-) as Restaurant;
+import { useRestaurant } from "./hooks/use-restaurant";
 
 function RestaurantDetails() {
-  const [isLoadingRestaurant, setIsLoadingRestaurant] = useState(true);
-  const [restaurant, setRestaurant] = useState<Restaurant>();
   const [selectedCategory, setSelectedCategory] = useState<string>();
 
-  useEffect(() => {
-    async function fetchRestaurant() {
-      const restaurantPromise = new Promise<Restaurant>((resolve) => {
-        setTimeout(() => {
-          resolve(restaurantEntry);
-          setIsLoadingRestaurant(false);
-        }, 2000);
-      });
-
-      const result = await restaurantPromise;
-      setRestaurant(result);
-      setSelectedCategory(result.categories[0]);
-      setIsLoadingRestaurant(false);
-    }
-
-    fetchRestaurant();
-  }, []);
+  const { restaurant, isLoadingRestaurant, setRestaurant } = useRestaurant(
+    (restaurant) => {
+      setSelectedCategory(restaurant.categories[0]);
+    },
+  );
 
   const visibleMenuItems = useMemo(
     () =>
