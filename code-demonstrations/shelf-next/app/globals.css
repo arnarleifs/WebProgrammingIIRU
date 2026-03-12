@@ -1,0 +1,22 @@
+@import "tailwindcss";
+
+@theme inline {
+  --font-sans: var(--font-geist-sans);
+  --font-mono: var(--font-geist-mono);
+}
+
+body {
+  font-family: var(--font-sans), Arial, Helvetica, sans-serif;
+  background-color: #09090b;
+}
+
+.scroll-row::-webkit-scrollbar {
+  height: 4px;
+}
+.scroll-row::-webkit-scrollbar-track {
+  background: transparent;
+}
+.scroll-row::-webkit-scrollbar-thumb {
+  background-color: #3f3f46;
+  border-radius: 99px;
+}
