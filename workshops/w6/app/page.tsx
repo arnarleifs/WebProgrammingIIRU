@@ -13,89 +13,11 @@ import {
   ConsoleStrategy,
 } from "@/src/patterns/strategy/notification-strategies";
 import { NotificationManager } from "@/src/patterns/strategy/notification-manager";
-
-type StrategyName = "toast" | "banner" | "console";
-
-const typeColors: Record<Notification["type"], string> = {
-  success: "bg-green-500 text-white",
-  error: "bg-red-500 text-white",
-  info: "bg-blue-500 text-white",
-};
-
-function NotificationButtons({
-  onNotify,
-}: {
-  onNotify: (type: Notification["type"]) => void;
-}) {
-  return (
-    <div className="flex gap-2">
-      <button
-        onClick={() => onNotify("success")}
-        className="px-3 py-1.5 text-sm rounded bg-green-500 text-white hover:bg-green-600"
-      >
-        Success
-      </button>
-      <button
-        onClick={() => onNotify("error")}
-        className="px-3 py-1.5 text-sm rounded bg-red-500 text-white hover:bg-red-600"
-      >
-        Error
-      </button>
-      <button
-        onClick={() => onNotify("info")}
-        className="px-3 py-1.5 text-sm rounded bg-blue-500 text-white hover:bg-blue-600"
-      >
-        Info
-      </button>
-    </div>
-  );
-}
-
-function ToastOverlay({
-  notifications,
-  onDismiss,
-}: {
-  notifications: Notification[];
-  onDismiss?: (id: string) => void;
-}) {
-  if (notifications.length === 0) return null;
-  return (
-    <div className="fixed bottom-4 right-4 flex flex-col gap-2 z-50">
-      {notifications.map((n) => (
-        <div
-          key={n.id}
-          className={`flex items-center justify-between gap-3 px-4 py-2 rounded shadow-md text-sm ${typeColors[n.type]}`}
-        >
-          <span>{n.message}</span>
-          {onDismiss && (
-            <button
-              onClick={() => onDismiss(n.id)}
-              className="font-bold opacity-80 hover:opacity-100"
-            >
-              ×
-            </button>
-          )}
-        </div>
-      ))}
-    </div>
-  );
-}
-
-function BannerOverlay({ notifications }: { notifications: Notification[] }) {
-  if (notifications.length === 0) return null;
-  return (
-    <div className="fixed top-0 left-0 right-0 flex flex-col z-50">
-      {notifications.map((n) => (
-        <div
-          key={n.id}
-          className={`w-full px-4 py-2 text-center text-sm font-medium ${typeColors[n.type]}`}
-        >
-          {n.message}
-        </div>
-      ))}
-    </div>
-  );
-}
+import { StrategyName } from "@/src/types/strategy-name";
+import { BannerOverlay } from "@/src/components/banner-overlay";
+import { NotificationButtons } from "@/src/components/notification-buttons";
+import { ToastOverlay } from "@/src/components/toast-overlay";
+import { typeColors } from "@/src/constants/type-colors";
 
 export default function Home() {
   const observerNotifications = useNotifications();
@@ -114,6 +36,7 @@ export default function Home() {
   const toastStrategy = useRef(new ToastStrategy(setToastNotifications));
   const bannerStrategy = useRef(new BannerStrategy(setBannerNotifications));
   const consoleStrategy = useRef(new ConsoleStrategy());
+  // eslint-disable-next-line react-hooks/refs
   const manager = useRef(new NotificationManager(toastStrategy.current));
   const bonusEmitter = useRef(
     new NotificationEmitter(new ToastStrategy(setBonusNotifications)),
